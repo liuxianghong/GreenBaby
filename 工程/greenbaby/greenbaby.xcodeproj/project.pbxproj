@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17959B166FE829CA09372B29 /* libPods-greenbaby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */; };
+		D3BDDED21C043EAD00F06536 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED11C043EAD00F06536 /* main.m */; };
+		D3BDDED51C043EAD00F06536 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED41C043EAD00F06536 /* AppDelegate.m */; };
+		D3BDDED81C043EAD00F06536 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED71C043EAD00F06536 /* ViewController.m */; };
+		D3BDDEDB1C043EAD00F06536 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDED91C043EAD00F06536 /* Main.storyboard */; };
+		D3BDDEDD1C043EAD00F06536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */; };
+		D3BDDEE01C043EAD00F06536 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */; };
+		D3BDDEF11C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEE81C04404E00F06536 /* README.md */; };
+		D3BDDEF21C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEA1C04404E00F06536 /* README.md */; };
+		D3BDDEF31C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEC1C04404E00F06536 /* README.md */; };
+		D3BDDEF41C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEE1C04404E00F06536 /* README.md */; };
+		D3BDDEF51C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEF01C04404E00F06536 /* README.md */; };
+		D3BDDEF81C04406300F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEF71C04406300F06536 /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.release.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.release.xcconfig"; sourceTree = "<group>"; };
+		4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.debug.xcconfig"; sourceTree = "<group>"; };
+		CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-greenbaby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3BDDECD1C043EAD00F06536 /* greenbaby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = greenbaby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3BDDED11C043EAD00F06536 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D3BDDED31C043EAD00F06536 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D3BDDED41C043EAD00F06536 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D3BDDED61C043EAD00F06536 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = greenbaby/ViewController.h; sourceTree = SOURCE_ROOT; };
+		D3BDDED71C043EAD00F06536 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = greenbaby/ViewController.m; sourceTree = SOURCE_ROOT; };
+		D3BDDEDA1C043EAD00F06536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3BDDEDF1C043EAD00F06536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D3BDDEE11C043EAD00F06536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3BDDEE81C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3BDDEEA1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3BDDEEC1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3BDDEEE1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3BDDEF01C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3BDDEF71C04406300F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D3BDDECA1C043EAD00F06536 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17959B166FE829CA09372B29 /* libPods-greenbaby.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FB69F1FD2FBF736A103668D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */,
+				0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D3BDDEC41C043EAD00F06536 = {
+			isa = PBXGroup;
+			children = (
+				D3BDDECF1C043EAD00F06536 /* greenbaby */,
+				D3BDDEE91C04404E00F06536 /* Resource */,
+				D3BDDEF91C0440FD00F06536 /* Frameworks */,
+				D3BDDECE1C043EAD00F06536 /* Products */,
+				3FB69F1FD2FBF736A103668D /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		D3BDDECE1C043EAD00F06536 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDECD1C043EAD00F06536 /* greenbaby.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D3BDDECF1C043EAD00F06536 /* greenbaby */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDED91C043EAD00F06536 /* Main.storyboard */,
+				D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */,
+				D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */,
+				D3BDDEF61C04406300F06536 /* Dependence */,
+				D3BDDEE71C04404E00F06536 /* Networking */,
+				D3BDDEEB1C04404E00F06536 /* Utils */,
+				D3BDDEED1C04404E00F06536 /* View */,
+				D3BDDEEF1C04404E00F06536 /* ViewController */,
+				D3BDDED01C043EAD00F06536 /* Supporting Files */,
+			);
+			path = greenbaby;
+			sourceTree = "<group>";
+		};
+		D3BDDED01C043EAD00F06536 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDED31C043EAD00F06536 /* AppDelegate.h */,
+				D3BDDED41C043EAD00F06536 /* AppDelegate.m */,
+				D3BDDEE11C043EAD00F06536 /* Info.plist */,
+				D3BDDED11C043EAD00F06536 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3BDDEE71C04404E00F06536 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDEE81C04404E00F06536 /* README.md */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D3BDDEE91C04404E00F06536 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDEEA1C04404E00F06536 /* README.md */,
+			);
+			name = Resource;
+			path = greenbaby/Resource;
+			sourceTree = "<group>";
+		};
+		D3BDDEEB1C04404E00F06536 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDEEC1C04404E00F06536 /* README.md */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D3BDDEED1C04404E00F06536 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDEEE1C04404E00F06536 /* README.md */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D3BDDEEF1C04404E00F06536 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDED61C043EAD00F06536 /* ViewController.h */,
+				D3BDDED71C043EAD00F06536 /* ViewController.m */,
+				D3BDDEF01C04404E00F06536 /* README.md */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D3BDDEF61C04406300F06536 /* Dependence */ = {
+			isa = PBXGroup;
+			children = (
+				D3BDDEF71C04406300F06536 /* README.md */,
+			);
+			name = Dependence;
+			path = ViewController/Dependence;
+			sourceTree = "<group>";
+		};
+		D3BDDEF91C0440FD00F06536 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */,
+			);
+			name = Frameworks;
+			path = greenbaby/Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D3BDDECC1C043EAD00F06536 /* greenbaby */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3BDDEE41C043EAD00F06536 /* Build configuration list for PBXNativeTarget "greenbaby" */;
+			buildPhases = (
+				6CB0438FD8AEED63AFBD52C5 /* Check Pods Manifest.lock */,
+				D3BDDEC91C043EAD00F06536 /* Sources */,
+				D3BDDECA1C043EAD00F06536 /* Frameworks */,
+				D3BDDECB1C043EAD00F06536 /* Resources */,
+				5BE4831E9143FE738164E250 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = greenbaby;
+			productName = greenbaby;
+			productReference = D3BDDECD1C043EAD00F06536 /* greenbaby.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D3BDDEC51C043EAD00F06536 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "刘向宏";
+				TargetAttributes = {
+					D3BDDECC1C043EAD00F06536 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = D3BDDEC81C043EAD00F06536 /* Build configuration list for PBXProject "greenbaby" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D3BDDEC41C043EAD00F06536;
+			productRefGroup = D3BDDECE1C043EAD00F06536 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3BDDECC1C043EAD00F06536 /* greenbaby */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D3BDDECB1C043EAD00F06536 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3BDDEE01C043EAD00F06536 /* LaunchScreen.storyboard in Resources */,
+				D3BDDEDD1C043EAD00F06536 /* Assets.xcassets in Resources */,
+				D3BDDEDB1C043EAD00F06536 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5BE4831E9143FE738164E250 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CB0438FD8AEED63AFBD52C5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D3BDDEC91C043EAD00F06536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3BDDEF31C04404E00F06536 /* README.md in Sources */,
+				D3BDDED81C043EAD00F06536 /* ViewController.m in Sources */,
+				D3BDDED51C043EAD00F06536 /* AppDelegate.m in Sources */,
+				D3BDDEF41C04404E00F06536 /* README.md in Sources */,
+				D3BDDEF21C04404E00F06536 /* README.md in Sources */,
+				D3BDDEF11C04404E00F06536 /* README.md in Sources */,
+				D3BDDEF81C04406300F06536 /* README.md in Sources */,
+				D3BDDEF51C04404E00F06536 /* README.md in Sources */,
+				D3BDDED21C043EAD00F06536 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D3BDDED91C043EAD00F06536 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3BDDEDA1C043EAD00F06536 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3BDDEDF1C043EAD00F06536 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D3BDDEE21C043EAD00F06536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D3BDDEE31C043EAD00F06536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D3BDDEE51C043EAD00F06536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = greenbaby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.greenbaby;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D3BDDEE61C043EAD00F06536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = greenbaby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.greenbaby;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D3BDDEC81C043EAD00F06536 /* Build configuration list for PBXProject "greenbaby" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3BDDEE21C043EAD00F06536 /* Debug */,
+				D3BDDEE31C043EAD00F06536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3BDDEE41C043EAD00F06536 /* Build configuration list for PBXNativeTarget "greenbaby" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3BDDEE51C043EAD00F06536 /* Debug */,
+				D3BDDEE61C043EAD00F06536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D3BDDEC51C043EAD00F06536 /* Project object */;
+}
