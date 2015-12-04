@@ -8,40 +8,64 @@
 
 /* Begin PBXBuildFile section */
 		17959B166FE829CA09372B29 /* libPods-greenbaby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */; };
+		D340FB551C0FFA5A00011B5B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB541C0FFA5A00011B5B /* HomeViewController.swift */; };
+		D340FB571C0FFB1700011B5B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB561C0FFB1700011B5B /* MainViewController.swift */; };
+		D340FB5A1C10092900011B5B /* ViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = D340FB591C10092900011B5B /* ViewController+menu.m */; };
+		D340FB5C1C101E1900011B5B /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB5B1C101E1900011B5B /* GreenButton.swift */; };
+		D340FB5E1C10225500011B5B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB5D1C10225500011B5B /* CustomButton.swift */; };
+		D340FB611C1025FF00011B5B /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB601C1025FF00011B5B /* WelcomeViewController.swift */; };
+		D340FB641C1026CD00011B5B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D340FB631C1026CD00011B5B /* README.md */; };
+		D340FB661C10317700011B5B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB651C10317700011B5B /* LoginViewController.swift */; };
+		D340FB681C103F1600011B5B /* CompleteMaterialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB671C103F1600011B5B /* CompleteMaterialTableViewController.swift */; };
+		D340FB6A1C1063EE00011B5B /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB691C1063EE00011B5B /* CompleteTableViewCell.swift */; };
+		D340FB6C1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB6B1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift */; };
+		D340FB6E1C10804C00011B5B /* CompleteValueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB6D1C10804C00011B5B /* CompleteValueTableViewController.swift */; };
 		D3BDDED21C043EAD00F06536 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED11C043EAD00F06536 /* main.m */; };
 		D3BDDED51C043EAD00F06536 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED41C043EAD00F06536 /* AppDelegate.m */; };
-		D3BDDED81C043EAD00F06536 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDED71C043EAD00F06536 /* ViewController.m */; };
 		D3BDDEDB1C043EAD00F06536 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDED91C043EAD00F06536 /* Main.storyboard */; };
 		D3BDDEDD1C043EAD00F06536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */; };
 		D3BDDEE01C043EAD00F06536 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */; };
-		D3BDDEF11C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEE81C04404E00F06536 /* README.md */; };
 		D3BDDEF21C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEA1C04404E00F06536 /* README.md */; };
-		D3BDDEF31C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEC1C04404E00F06536 /* README.md */; };
-		D3BDDEF41C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEE1C04404E00F06536 /* README.md */; };
-		D3BDDEF51C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEF01C04404E00F06536 /* README.md */; };
-		D3BDDEF81C04406300F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEF71C04406300F06536 /* README.md */; };
+		D3FF82321C0F366F00B92022 /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FF82301C0F366F00B92022 /* NSString+scisky.m */; };
+		D3FF82331C0F366F00B92022 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF82311C0F366F00B92022 /* SwiftyJSON.swift */; };
+		D3FF82361C0F369700B92022 /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FF82351C0F369700B92022 /* BaseHTTPRequestOperationManager.m */; };
+		D3FF82391C0F371100B92022 /* UIColor+greenbaby.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FF82381C0F371100B92022 /* UIColor+greenbaby.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.release.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.release.xcconfig"; sourceTree = "<group>"; };
 		4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.debug.xcconfig"; sourceTree = "<group>"; };
 		CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-greenbaby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D340FB541C0FFA5A00011B5B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D340FB561C0FFB1700011B5B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D340FB581C10092900011B5B /* ViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+menu.h"; sourceTree = "<group>"; };
+		D340FB591C10092900011B5B /* ViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+menu.m"; sourceTree = "<group>"; };
+		D340FB5B1C101E1900011B5B /* GreenButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GreenButton.swift; path = greenbaby/View/GreenButton.swift; sourceTree = SOURCE_ROOT; };
+		D340FB5D1C10225500011B5B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		D340FB601C1025FF00011B5B /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		D340FB631C1026CD00011B5B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D340FB651C10317700011B5B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D340FB671C103F1600011B5B /* CompleteMaterialTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteMaterialTableViewController.swift; sourceTree = "<group>"; };
+		D340FB691C1063EE00011B5B /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
+		D340FB6B1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteMaterialSexTableViewCell.swift; sourceTree = "<group>"; };
+		D340FB6D1C10804C00011B5B /* CompleteValueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteValueTableViewController.swift; sourceTree = "<group>"; };
 		D3BDDECD1C043EAD00F06536 /* greenbaby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = greenbaby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3BDDED11C043EAD00F06536 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3BDDED31C043EAD00F06536 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D3BDDED41C043EAD00F06536 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D3BDDED61C043EAD00F06536 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = greenbaby/ViewController.h; sourceTree = SOURCE_ROOT; };
-		D3BDDED71C043EAD00F06536 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = greenbaby/ViewController.m; sourceTree = SOURCE_ROOT; };
 		D3BDDEDA1C043EAD00F06536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3BDDEDF1C043EAD00F06536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3BDDEE11C043EAD00F06536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D3BDDEE81C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D3BDDEEA1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3BDDEEC1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3BDDEEE1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3BDDEF01C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3BDDEF71C04406300F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3FF822E1C0F366F00B92022 /* greenbaby-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "greenbaby-Bridging-Header.h"; path = "Utils/greenbaby-Bridging-Header.h"; sourceTree = "<group>"; };
+		D3FF822F1C0F366F00B92022 /* NSString+scisky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+scisky.h"; sourceTree = "<group>"; };
+		D3FF82301C0F366F00B92022 /* NSString+scisky.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+scisky.m"; sourceTree = "<group>"; };
+		D3FF82311C0F366F00B92022 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		D3FF82341C0F369700B92022 /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		D3FF82351C0F369700B92022 /* BaseHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		D3FF82371C0F371100B92022 /* UIColor+greenbaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+greenbaby.h"; sourceTree = "<group>"; };
+		D3FF82381C0F371100B92022 /* UIColor+greenbaby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+greenbaby.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +87,25 @@
 				0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D340FB5F1C1025DF00011B5B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D340FB601C1025FF00011B5B /* WelcomeViewController.swift */,
+				D340FB651C10317700011B5B /* LoginViewController.swift */,
+				D340FB671C103F1600011B5B /* CompleteMaterialTableViewController.swift */,
+				D340FB6D1C10804C00011B5B /* CompleteValueTableViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D340FB621C1026CD00011B5B /* Dependence */ = {
+			isa = PBXGroup;
+			children = (
+				D340FB631C1026CD00011B5B /* README.md */,
+			);
+			path = Dependence;
 			sourceTree = "<group>";
 		};
 		D3BDDEC41C043EAD00F06536 = {
@@ -87,10 +130,11 @@
 		D3BDDECF1C043EAD00F06536 /* greenbaby */ = {
 			isa = PBXGroup;
 			children = (
+				D3FF822E1C0F366F00B92022 /* greenbaby-Bridging-Header.h */,
 				D3BDDED91C043EAD00F06536 /* Main.storyboard */,
 				D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */,
 				D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */,
-				D3BDDEF61C04406300F06536 /* Dependence */,
+				D340FB621C1026CD00011B5B /* Dependence */,
 				D3BDDEE71C04404E00F06536 /* Networking */,
 				D3BDDEEB1C04404E00F06536 /* Utils */,
 				D3BDDEED1C04404E00F06536 /* View */,
@@ -114,7 +158,8 @@
 		D3BDDEE71C04404E00F06536 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				D3BDDEE81C04404E00F06536 /* README.md */,
+				D3FF82341C0F369700B92022 /* BaseHTTPRequestOperationManager.h */,
+				D3FF82351C0F369700B92022 /* BaseHTTPRequestOperationManager.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -131,7 +176,13 @@
 		D3BDDEEB1C04404E00F06536 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D3BDDEEC1C04404E00F06536 /* README.md */,
+				D340FB581C10092900011B5B /* ViewController+menu.h */,
+				D340FB591C10092900011B5B /* ViewController+menu.m */,
+				D3FF822F1C0F366F00B92022 /* NSString+scisky.h */,
+				D3FF82301C0F366F00B92022 /* NSString+scisky.m */,
+				D3FF82311C0F366F00B92022 /* SwiftyJSON.swift */,
+				D3FF82371C0F371100B92022 /* UIColor+greenbaby.h */,
+				D3FF82381C0F371100B92022 /* UIColor+greenbaby.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -139,7 +190,10 @@
 		D3BDDEED1C04404E00F06536 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D3BDDEEE1C04404E00F06536 /* README.md */,
+				D340FB5B1C101E1900011B5B /* GreenButton.swift */,
+				D340FB5D1C10225500011B5B /* CustomButton.swift */,
+				D340FB691C1063EE00011B5B /* CompleteTableViewCell.swift */,
+				D340FB6B1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,20 +201,11 @@
 		D3BDDEEF1C04404E00F06536 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D3BDDED61C043EAD00F06536 /* ViewController.h */,
-				D3BDDED71C043EAD00F06536 /* ViewController.m */,
-				D3BDDEF01C04404E00F06536 /* README.md */,
+				D340FB561C0FFB1700011B5B /* MainViewController.swift */,
+				D340FB541C0FFA5A00011B5B /* HomeViewController.swift */,
+				D340FB5F1C1025DF00011B5B /* Login */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		D3BDDEF61C04406300F06536 /* Dependence */ = {
-			isa = PBXGroup;
-			children = (
-				D3BDDEF71C04406300F06536 /* README.md */,
-			);
-			name = Dependence;
-			path = ViewController/Dependence;
 			sourceTree = "<group>";
 		};
 		D3BDDEF91C0440FD00F06536 /* Frameworks */ = {
@@ -277,15 +322,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3BDDEF31C04404E00F06536 /* README.md in Sources */,
-				D3BDDED81C043EAD00F06536 /* ViewController.m in Sources */,
+				D340FB5E1C10225500011B5B /* CustomButton.swift in Sources */,
+				D3FF82361C0F369700B92022 /* BaseHTTPRequestOperationManager.m in Sources */,
+				D340FB571C0FFB1700011B5B /* MainViewController.swift in Sources */,
+				D340FB681C103F1600011B5B /* CompleteMaterialTableViewController.swift in Sources */,
+				D340FB661C10317700011B5B /* LoginViewController.swift in Sources */,
 				D3BDDED51C043EAD00F06536 /* AppDelegate.m in Sources */,
-				D3BDDEF41C04404E00F06536 /* README.md in Sources */,
+				D340FB5A1C10092900011B5B /* ViewController+menu.m in Sources */,
+				D340FB5C1C101E1900011B5B /* GreenButton.swift in Sources */,
 				D3BDDEF21C04404E00F06536 /* README.md in Sources */,
-				D3BDDEF11C04404E00F06536 /* README.md in Sources */,
-				D3BDDEF81C04406300F06536 /* README.md in Sources */,
-				D3BDDEF51C04404E00F06536 /* README.md in Sources */,
+				D340FB6E1C10804C00011B5B /* CompleteValueTableViewController.swift in Sources */,
+				D3FF82321C0F366F00B92022 /* NSString+scisky.m in Sources */,
+				D340FB6C1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift in Sources */,
+				D3FF82331C0F366F00B92022 /* SwiftyJSON.swift in Sources */,
+				D340FB551C0FFA5A00011B5B /* HomeViewController.swift in Sources */,
+				D340FB641C1026CD00011B5B /* README.md in Sources */,
+				D340FB6A1C1063EE00011B5B /* CompleteTableViewCell.swift in Sources */,
 				D3BDDED21C043EAD00F06536 /* main.m in Sources */,
+				D3FF82391C0F371100B92022 /* UIColor+greenbaby.m in Sources */,
+				D340FB611C1025FF00011B5B /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,11 +451,14 @@
 			baseConfigurationReference = 4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = greenbaby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.greenbaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "greenbaby/Utils/greenbaby-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -409,11 +467,13 @@
 			baseConfigurationReference = 0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = greenbaby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.greenbaby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "greenbaby/Utils/greenbaby-Bridging-Header.h";
 			};
 			name = Release;
 		};
