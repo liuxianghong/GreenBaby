@@ -36,8 +36,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func jumpOutClicked(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-        }
+        self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
     }
     
     @IBAction func nextClicked(sender: AnyObject) {

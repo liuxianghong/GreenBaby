@@ -19,6 +19,7 @@ class WelcomeViewController: UIViewController {
         wxinButton.backgroundColor = UIColor.mainGreenColor()
         wxinButton.layer.borderColor = UIColor.whiteColor().CGColor
         wxinButton.layer.borderWidth = 1.0
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
