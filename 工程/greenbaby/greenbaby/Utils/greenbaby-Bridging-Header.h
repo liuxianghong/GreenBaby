@@ -4,3 +4,6 @@
 
 #import "UIColor+greenbaby.h"
 #import <MJRefresh.h>
+#import "UMSocialWechatHandler.h"
+#import "UMSocial.h"
+#import "UMHelp.h"

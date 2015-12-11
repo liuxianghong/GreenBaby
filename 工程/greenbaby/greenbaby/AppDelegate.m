@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocial.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [UMSocialData setAppKey:@"566afeaf67e58ede81003e22"];
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:@"wxf69688c2aac8d74e" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.umeng.com/social"];
+    
     return YES;
 }
 
@@ -40,6 +47,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
 }
 
 @end

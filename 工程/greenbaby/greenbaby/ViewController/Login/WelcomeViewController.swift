@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
 
     @IBOutlet weak var wxinButton : UIButton!
     override func viewDidLoad() {
@@ -35,6 +35,10 @@ class WelcomeViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        UMSocialDataService.defaultDataService().requestSnsInformation(UMShareToWechatSession) { (response : UMSocialResponseEntity!) -> Void in
+            NSLog("SnsInformation is %@",response.data)
+        }
     }
     
     @IBAction func missClicked(sender: UIButton) {
@@ -43,7 +47,32 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func wxinClicked(sender: UIButton) {
-        self.performSegueWithIdentifier("wxinIdentifier", sender: 1)
+        
+        
+        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+        snsPlatform.needLogin = true
+        UMSocialControllerService.defaultControllerService().socialUIDelegate = self
+        UMHelp.loginUMSocialSnsPlatform(snsPlatform, vc: self, server: UMSocialControllerService.defaultControllerService(), isPresent: true) { (response :UMSocialResponseEntity! ) -> Void in
+        
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                let snsAccountDictionary = UMSocialAccountManager.socialAccountDictionary() as NSDictionary
+                let snsAccount = snsAccountDictionary.valueForKey(UMShareToWechatSession)
+                
+                NSLog("username is %@, uid is %@, token is %@ url is %@",snsAccount!.userName,snsAccount!.usid,snsAccount!.accessToken,snsAccount!.iconURL);
+                
+            }
+        }
+        
+        
+            
+            
+            
+        
+        //self.performSegueWithIdentifier("wxinIdentifier", sender: 1)
+    }
+    
+    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+        NSLog("SnsInformation is ")
     }
     
     @IBAction func phoneClicked(sender: UIButton) {

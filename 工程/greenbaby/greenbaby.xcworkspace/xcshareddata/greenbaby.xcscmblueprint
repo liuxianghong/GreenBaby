@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B6F172E278383CB89285689A25CC53C2426C9B21",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "28E56F7CEF3E971FA5DF29599F66C07AD103243D" : 0,
+    "B6F172E278383CB89285689A25CC53C2426C9B21" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5BB6CA51-5180-48AD-9FDB-D1D4C460D0DC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "28E56F7CEF3E971FA5DF29599F66C07AD103243D" : "meizhikang\/",
+    "B6F172E278383CB89285689A25CC53C2426C9B21" : "GreenBaby\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "greenbaby",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "工程\/greenbaby\/greenbaby.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/liuxianghong\/meizhikang.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "28E56F7CEF3E971FA5DF29599F66C07AD103243D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:liuxianghong\/GreenBaby.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B6F172E278383CB89285689A25CC53C2426C9B21"
+    }
+  ]
+}
