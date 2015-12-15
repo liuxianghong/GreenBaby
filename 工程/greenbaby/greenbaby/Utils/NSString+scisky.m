@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonKeyDerivation.h>
 #import "NSString+scisky.h"
-#define KeyStr @"@UTALIFE"
+#define KeyStr @"SDFL#)@F"
 
 @implementation NSString (scisky)
 

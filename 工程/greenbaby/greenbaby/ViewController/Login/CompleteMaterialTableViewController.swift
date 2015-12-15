@@ -8,9 +8,21 @@
 
 import UIKit
 
+class CompleteMaterialModel{
+    var id : String!
+    var value : String!
+    init(){
+        id = ""
+        value = ""
+    }
+}
+
 class CompleteMaterialTableViewController: UITableViewController {
+    var wxLoginModel = WXLoginModel()
+    var tableViewArray : NSArray = [["视力信息",CompleteMaterialModel()],["平均每天读写时间（小时）",CompleteMaterialModel()],["年龄（岁）",CompleteMaterialModel()],["省份",CompleteMaterialModel()],["城市",CompleteMaterialModel()]]
     
-    var tableViewArray : NSArray = [["视力信息"," 3.5/0.03"],["平均每天读写时间（小时）"," 4"],["年龄（岁）"," 7"],["省份"," 广东"],["城市"," 深圳"]]
+    var sex = "0"
+    var currentCompleteMaterialModel : CompleteMaterialModel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +41,7 @@ class CompleteMaterialTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -36,16 +49,78 @@ class CompleteMaterialTableViewController: UITableViewController {
     }
 
     @IBAction func manClicked(sender: UIButton) {
-        print("111111")
+        sex = "0"
     }
     
     @IBAction func womanClicked(sender: UIButton) {
-        print("222222")
+        sex = "1"
     }
     
     @IBAction func nextClicked(sender: UIButton) {
-        self.dismissViewControllerAnimated(true) { () -> Void in
+        
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        let eyesight = (tableViewArray[0][1] as! CompleteMaterialModel).id
+        let averageTime = (tableViewArray[1][1] as! CompleteMaterialModel).id
+        let age = (tableViewArray[2][1] as! CompleteMaterialModel).id
+        let provinceId = (tableViewArray[3][1] as! CompleteMaterialModel).id
+        let cityId = (tableViewArray[4][1] as! CompleteMaterialModel).id
+        if eyesight.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请选择视力范围"
+            hud.hide(true, afterDelay: 1.5)
+            return;
         }
+        
+        if averageTime.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请选择用眼时间范围"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if age.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请选择年龄范围"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if provinceId.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请选择省份"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if cityId.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请选择城市"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")!
+        let dic :NSDictionary = ["userId": userId,"nickName": wxLoginModel.userName,"headImage": wxLoginModel.iconURL, "eyesight":eyesight,"averageTime": averageTime,"age": age,"sex": sex,"provinceId":provinceId,"cityId": cityId]
+        LoginRequest.UpdateEndUserWithParameters(dic, success: { (object) -> Void in
+            let dic:NSDictionary = object as! NSDictionary
+            let state:Int = dic["state"] as! Int
+            if state == 0{
+                hud.hide(true)
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                }
+            }else{
+                hud.mode = .Text
+                hud.detailsLabelText = dic["description"] as! String
+                hud.hide(true, afterDelay: 1.5)
+            }
+            }) { (error:NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain
+                hud.hide(true, afterDelay: 1.5)
+        }
+        
+        
     }
     // MARK: - Table view data source
 
@@ -75,7 +150,8 @@ class CompleteMaterialTableViewController: UITableViewController {
             // Configure the cell...
             let array : NSArray = tableViewArray[indexPath.row] as! NSArray
             cell.nameLabel.text = array[0] as? String
-            cell.valueLabel.text = (array[1] as! String)
+            let completeMaterialModel = (array[1] as! CompleteMaterialModel)
+            cell.valueLabel.text = completeMaterialModel.value
             return cell
         }
 
@@ -83,6 +159,17 @@ class CompleteMaterialTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row != tableViewArray.count{
+            if indexPath.row == 4{
+                let array : NSArray = tableViewArray[3] as! NSArray
+                let model = array[1] as! CompleteMaterialModel
+                if model.id.isEmpty{
+                    let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+                    hud.mode = .Text
+                    hud.detailsLabelText = "请先选择省份"
+                    hud.hide(true, afterDelay: 1.5)
+                    return
+                }
+            }
             self.performSegueWithIdentifier("CompleteValueIdentifier", sender: indexPath.row)
         }
     }
@@ -133,6 +220,14 @@ class CompleteMaterialTableViewController: UITableViewController {
         if segue.identifier == "CompleteValueIdentifier"{
             let vc : CompleteValueTableViewController = segue.destinationViewController as! CompleteValueTableViewController
             vc.type = sender as! Int
+            let array : NSArray = tableViewArray[vc.type] as! NSArray
+            vc.completeMaterialModel = (array[1] as! CompleteMaterialModel)
+            
+            if vc.type == 4{
+                let array : NSArray = tableViewArray[3] as! NSArray
+                let model = array[1] as! CompleteMaterialModel
+                vc.pid = model.id
+            }
         }
     }
 

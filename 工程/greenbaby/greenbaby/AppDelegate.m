@@ -22,7 +22,7 @@
     
     [UMSocialData setAppKey:@"566afeaf67e58ede81003e22"];
     //设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:@"wxf69688c2aac8d74e" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wxd2968aaab147c80c" appSecret:@"4cdf77d7c60f7da968aa812147f9e5a4" url:@"http://www.tm0755.com"];
     
     return YES;
 }

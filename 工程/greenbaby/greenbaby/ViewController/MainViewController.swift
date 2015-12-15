@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UITabBarController {
 
+    var first : Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +37,11 @@ class MainViewController: UITabBarController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        if first{
+            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            first = false
+        }
+        
     }
 
     /*

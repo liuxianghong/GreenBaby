@@ -8,9 +8,17 @@
 
 import UIKit
 
+
+class WXLoginModel{
+    var userName : String! = ""
+    var iconURL : String! = ""
+}
+
 class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
 
     @IBOutlet weak var wxinButton : UIButton!
+    
+    var wxLoginModel = WXLoginModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,10 +43,6 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        UMSocialDataService.defaultDataService().requestSnsInformation(UMShareToWechatSession) { (response : UMSocialResponseEntity!) -> Void in
-            NSLog("SnsInformation is %@",response.data)
-        }
     }
     
     @IBAction func missClicked(sender: UIButton) {
@@ -55,28 +59,69 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
         UMHelp.loginUMSocialSnsPlatform(snsPlatform, vc: self, server: UMSocialControllerService.defaultControllerService(), isPresent: true) { (response :UMSocialResponseEntity! ) -> Void in
         
             if (response.responseCode == UMSResponseCodeSuccess) {
+                
                 let snsAccountDictionary = UMSocialAccountManager.socialAccountDictionary() as NSDictionary
                 let snsAccount = snsAccountDictionary.valueForKey(UMShareToWechatSession)
                 
                 NSLog("username is %@, uid is %@, token is %@ url is %@",snsAccount!.userName,snsAccount!.usid,snsAccount!.accessToken,snsAccount!.iconURL);
                 
+               self.wxLoginModel.userName = snsAccount!.userName
+                self.wxLoginModel.iconURL = snsAccount!.iconURL
+                
+                let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+                let dic = ["type": 0,"wxId": (snsAccount?.openId)! as String]
+                print(dic)
+                LoginRequest.UserLoginWithParameters(dic, success: { (object : AnyObject!) -> Void in
+                    print(object)
+                    let dic:NSDictionary = object as! NSDictionary
+                    let state:Int = dic["state"] as! Int
+                    if state == 0{
+                        let dicdata:NSDictionary = dic["data"] as! NSDictionary
+                        let userId = String(dicdata["userId"] as! Int)
+                        let userName = dicdata["userName"] as! String
+                        let gold = dicdata["gold"] as! Int
+                        let binded = dicdata["binded"] as! Int
+                        NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "userId")
+                        NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
+                        NSUserDefaults.standardUserDefaults().setObject(gold, forKey: "gold")
+                        if binded == 0{
+                            self.performSegueWithIdentifier("wxinIdentifier", sender: 2)
+                        }
+                        else{
+                            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                            })
+                        }
+                        hud.hide(true)
+                    }else if state == 4{
+                        self.performSegueWithIdentifier("wxinIdentifier", sender: 3)
+                        hud.hide(true)
+                    }
+                    else{
+                        hud.mode = .Text
+                        hud.detailsLabelText = dic["description"] as! String
+                        hud.hide(true, afterDelay: 1.5)
+                    }
+                    
+                    }) { (error : NSError!) -> Void in
+                        print(error)
+                        hud.mode = .Text
+                        hud.detailsLabelText = error.domain
+                        hud.hide(true, afterDelay: 1.5)
+                }
+                
             }
         }
         
-        
-            
-            
-            
         
         //self.performSegueWithIdentifier("wxinIdentifier", sender: 1)
     }
     
     func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
-        NSLog("SnsInformation is ")
+        NSLog("SnsInformation is %@",response.data);
     }
     
     @IBAction func phoneClicked(sender: UIButton) {
-        self.performSegueWithIdentifier("wxinIdentifier", sender: 2)
+        self.performSegueWithIdentifier("wxinIdentifier", sender: 1)
     }
 
     
@@ -89,6 +134,7 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
         if segue.identifier == "wxinIdentifier"{
             let vc:LoginViewController = segue.destinationViewController as! LoginViewController
             vc.type = sender as! Int
+            vc.wxLoginModel = self.wxLoginModel
         }
     }
 

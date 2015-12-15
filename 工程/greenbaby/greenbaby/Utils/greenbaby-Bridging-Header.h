@@ -7,3 +7,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
 #import "UMHelp.h"
+#import "LoginRequest.h"
+#import "BannersRequest.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "NSString+scisky.h"
