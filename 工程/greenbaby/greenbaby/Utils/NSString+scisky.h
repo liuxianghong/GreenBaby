@@ -9,10 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#define kErrorEmpty @"服务器返回错误"
+#define kErrorConnect @"无法连接到服务器"
+#define baseURL @"http://120.25.159.193:8090/greenbaby"
+#define resourceSeeURL @"http://120.25.159.193/ResourceServer/"
+
 @interface NSString (scisky)
 -(NSString *)AESEncrypt;
 - (BOOL)checkTel;
 + (BOOL)validateIDCardNumber:(NSString *)value;
 - (BOOL)isValidateEmail;
+- (NSString *)toResourceSeeURL;
 @end
 

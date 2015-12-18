@@ -30,6 +30,8 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             self.buttonView.clipsToBounds = false
             self.buttonView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)
         }
+        
+        self.tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

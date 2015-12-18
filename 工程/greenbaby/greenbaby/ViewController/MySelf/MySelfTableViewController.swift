@@ -38,14 +38,7 @@ class MySelfTableViewController: UITableViewController {
         
         self.tableView.backgroundColor = UIColor.whiteColor()
         
-        if true{
-            self.loginButton.hidden = true
-        }
-        else
-        {
-            self.nameLabel.hidden = true
-            self.addressLabel.hidden = true
-        }
+        
         
         headHeight = self.view.frame.size.height/4;
         if headHeight < 500/4{
@@ -69,6 +62,25 @@ class MySelfTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
+        if userId != nil{
+            self.loginButton.hidden = true
+            self.nameLabel.hidden = false
+            self.addressLabel.hidden = false
+            
+            self.nameLabel.text = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
+            let gold = NSUserDefaults.standardUserDefaults().objectForKey("gold") as! Int
+            self.moneyLabel.text = "\(gold)"
+            if NSUserDefaults.standardUserDefaults().objectForKey("headImage") != nil{
+                headImageView.sd_setImageWithURL(NSURL(string: (NSUserDefaults.standardUserDefaults().objectForKey("headImage") as! String).toResourceSeeURL()))
+            }
+        }
+        else
+        {
+            self.loginButton.hidden = false
+            self.nameLabel.hidden = true
+            self.addressLabel.hidden = true
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -82,6 +94,13 @@ class MySelfTableViewController: UITableViewController {
     
     @IBAction func switchClick(sendr : UIButton){
         sendr.selected = !sendr.selected
+    }
+    
+    @IBAction func inforMationSeeClick(){
+        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
+        if userId != nil{
+            self.performSegueWithIdentifier("UserSeeIdentifier", sender: nil)
+        }
     }
     
     // MARK: - Table view data source
@@ -112,6 +131,18 @@ class MySelfTableViewController: UITableViewController {
             self.presentViewController(avc, animated: true, completion: { () -> Void in
                 
             })
+        }
+        else if indexPath.section == 0{
+            if indexPath.row <= 1{
+                let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
+                if userId == nil{
+                    self.loginClick(self.loginButton)
+                }
+                else{
+                    self.performSegueWithIdentifier("ThreadsIdentifier", sender: indexPath.row)
+                }
+            }
+            
         }
     }
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -169,14 +200,18 @@ class MySelfTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ThreadsIdentifier"{
+            let vc = segue.destinationViewController as! ThreadsTableViewController
+            vc.type = sender as! Int
+        }
     }
-    */
+
 
 }

@@ -10,11 +10,7 @@
 #import "JSONKit.h"
 #import "NSString+scisky.h"
 
-#define kErrorEmpty @"服务器返回错误"
-#define kErrorConnect @"无法连接到服务器"
-#define baseURL @"http://120.25.159.193:8090/greenbaby"
-#define resourceSeeURL @"http://121.42.10.232/utalifeResource/"
-#define resourceURL @"http://121.42.10.232/utalifeResource/image?image="
+
 
 @implementation BaseHTTPRequestOperationManager
 {

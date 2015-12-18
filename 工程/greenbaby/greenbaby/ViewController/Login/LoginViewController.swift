@@ -196,6 +196,7 @@ class LoginViewController: UIViewController {
                     NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "userId")
                     NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
                     NSUserDefaults.standardUserDefaults().setObject(gold, forKey: "gold")
+                    NSUserDefaults.standardUserDefaults().synchronize()
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     })
                     hud.hide(true)

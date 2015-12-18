@@ -9,5 +9,8 @@
 #import "UMHelp.h"
 #import "LoginRequest.h"
 #import "BannersRequest.h"
+#import "ForumRequest.h"
+#import "FileRequest.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "UIImageView+WebCache.h"
 #import "NSString+scisky.h"

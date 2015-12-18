@@ -320,6 +320,12 @@
     return [emailTest evaluateWithObject:self];
 }
 
+- (NSString *)toResourceSeeURL{
+    if ([self rangeOfString:@"http"].location == 0) {
+        return self;
+    }
+    return [NSString stringWithFormat:@"%@%@",resourceSeeURL,self];
+}
 @end
 
 
