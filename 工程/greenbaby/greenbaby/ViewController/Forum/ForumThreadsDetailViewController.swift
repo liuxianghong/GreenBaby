@@ -8,15 +8,18 @@
 
 import UIKit
 
-class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource{
+class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource{
 
-    var dic : NSDictionary!
+    var dic : [String : AnyObject]!
+    var goodNumber : Int = 0
+    var commentNumber : Int = 0
     var dataDic : NSDictionary! = NSDictionary()
     var commentsArray : NSArray! = NSArray()
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var inputTextView : UIView!
-    @IBOutlet weak var inputField : UITextField!
+    @IBOutlet weak var inputField : UITextView!
     @IBOutlet weak var constraint : NSLayoutConstraint!
+    @IBOutlet weak var inputConstraint : NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +29,17 @@ class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UI
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.tableFooterView = UIView();
         
+        inputField.layer.borderWidth = 1/UIScreen.mainScreen().scale
+        inputField.layer.borderColor = UIColor.lightGrayColor().CGColor
+        inputField.layer.masksToBounds = true
+        inputField.layer.cornerRadius = 4;
+        
+        inputField.text = " "
+        inputConstraint.constant = inputField.contentSize.height
+        inputField.text = ""
+        
+        goodNumber = dic["praiseCount"] as! Int
+        commentNumber = dic["commentCount"] as! Int
         //当键盘出来的时候通过通知来获取键盘的信息
         //注册为键盘的监听着
         let center = NSNotificationCenter.defaultCenter()
@@ -98,15 +112,22 @@ class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UI
     @IBAction func upDateGood(bo : Bool){
         
         let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
-        let dicP : Dictionary<String,AnyObject> = ["forumId" : self.dic["threadId"]!,"userId" : userId!,"praise": bo]
+        let dicP : Dictionary<String,AnyObject> = ["forumId" : self.dic["threadId"]!,"userId" : userId!]
         ForumRequest.UpdateForumPraiseWithParameters(dicP, success: { (object) -> Void in
             print(object)
             let dicd:NSDictionary = object as! NSDictionary
             let state:Int = dicd["state"] as! Int
+            let data = dicd["data"] as! Int
             if state == 0{
-                self.loadData(false)
+                if data == 0{
+                    self.goodNumber++
+                }
+                else{
+                    self.goodNumber--
+                }
+                self.dic["praiseCount"] = self.goodNumber
+                self.tableView.reloadData()
             }else{
-                self.upDateGood(!bo)
             }
             }) { (error : NSError!) -> Void in
         }
@@ -130,8 +151,11 @@ class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UI
                 hud.mode = .Text
                 hud.detailsLabelText = "评论成功"
                 hud.hide(true, afterDelay: 1.5)
-                self.loadData(false)
                 self.inputField.text = ""
+                self.inputConstraint.constant = self.inputField.contentSize.height
+                self.commentNumber++
+                self.dic["commentCount"] = self.commentNumber
+                self.loadData(false)
             }else{
                 hud.mode = .Text
                 hud.detailsLabelText = dicd["description"] as! String
@@ -151,27 +175,36 @@ class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UI
             
             
             let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]?.doubleValue
+            self.constraint.constant = self.view.frame.size.height - r1.origin.y
+            self.view.setNeedsUpdateConstraints()
             UIView.animateWithDuration(duration!, animations: { () -> Void in
                 
-                
+                self.view.layoutIfNeeded()
                 let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey]?.integerValue
                 UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve!)!)
                 
-                self.constraint.constant = self.view.frame.size.height - r1.origin.y
+                
             })
         }
         
     }
     
     // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool{
+        if inputConstraint.constant != textView.contentSize.height{
+            inputConstraint.constant = textView.contentSize.height
+            self.view.needsUpdateConstraints()
+            self.view.setNeedsLayout()
+        }
+        
         return true
     }
     
     // MARK: - UITextFieldDelegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.inputField.resignFirstResponder()
+        if !scrollView.isEqual(inputField){
+            self.inputField.resignFirstResponder()
+        }
     }
     
     // MARK: - Table view data source
@@ -194,7 +227,7 @@ class ForumThreadsDetailViewController: UIViewController,UITextFieldDelegate ,UI
             let cell = tableView.dequeueReusableCellWithIdentifier("ForumThreadsDetailHeadTableViewCell", forIndexPath: indexPath) as! ForumThreadsDetailHeadTableViewCell
             
             // Configure the cell...
-            cell.dataDic = dic
+            cell.dataDic = dic as NSDictionary//dic
             return cell
         }
         

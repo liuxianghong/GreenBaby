@@ -16,13 +16,20 @@ class MainViewController: UITabBarController {
 
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        UINavigationBar.appearance().barTintColor = UIColor.mainGreenColor()
+        UIGraphicsBeginImageContext(CGSizeMake(1, 1));
+        let context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context,UIColor.mainGreenColor().CGColor);
+        CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
+        let img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        UINavigationBar.appearance().setBackgroundImage(img, forBarPosition: .Any, barMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().backItem?.title = "返回"
         self.tabBar.tintColor = UIColor.mainGreenColor()
         for item in self.tabBar.items!{
             item.setTitleTextAttributes( [NSForegroundColorAttributeName : UIColor.mainGreenColor()] , forState: .Selected)
         }
-        // Do any additional setup after loading the view.
         
     }
 

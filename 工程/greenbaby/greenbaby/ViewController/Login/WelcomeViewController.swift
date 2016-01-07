@@ -27,7 +27,7 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
         wxinButton.backgroundColor = UIColor.mainGreenColor()
         wxinButton.layer.borderColor = UIColor.whiteColor().CGColor
         wxinButton.layer.borderWidth = 1.0
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,12 +37,12 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func missClicked(sender: UIButton) {

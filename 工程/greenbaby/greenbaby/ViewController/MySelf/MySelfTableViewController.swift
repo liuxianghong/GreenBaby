@@ -31,7 +31,7 @@ class MySelfTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationItem.backBarButtonItem = UIBarButtonItem();
         self.navigationItem.backBarButtonItem?.title = "返回"
         headView.backgroundColor = UIColor.mainGreenColor()
@@ -40,8 +40,9 @@ class MySelfTableViewController: UITableViewController {
         
         
         
-        headHeight = self.view.frame.size.height/4;
-        if headHeight < 500/4{
+        headHeight = (self.view.frame.size.height-64)/4-44;
+        if headHeight < 120{
+            headHeight = 80
             headConstraint.constant = 40
             headBConstraint.constant = 5
             headBBConstraint.constant = 8
@@ -61,7 +62,7 @@ class MySelfTableViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
         if userId != nil{
             self.loginButton.hidden = true
@@ -85,7 +86,7 @@ class MySelfTableViewController: UITableViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func loginClick(sendr : UIButton){
@@ -113,7 +114,7 @@ class MySelfTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height = (self.view.frame.size.height - headHeight - 8 - 20 - 49)/9
+        let height = (self.view.frame.size.height - headHeight - 8 - 49)/9
         return height;
     }
     

@@ -141,7 +141,7 @@ class ForumThreadsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "ForumThreadsDetail"{
             let vc = segue.destinationViewController as! ForumThreadsDetailViewController
-            vc.dic = sender as! NSDictionary
+            vc.dic = sender as! [String : AnyObject]
         }
         if segue.identifier == "ForumPublish"{
             let vc = segue.destinationViewController as! ForumPublishTableViewController

@@ -25,8 +25,10 @@ class ForumThreadsDetailCommentTableViewCell: UITableViewCell {
                 self.nameLabel.text = value["memberName"] as? String
                 self.titleLabel.text = value["comment"] as? String
                 self.addressLabel.text = value["location"] as? String
-                let url = NSURL(string: (value["memberHeadImage"] as! String).toResourceSeeURL())
-                self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
+                if value["memberHeadImage"] != nil{
+                    let url = NSURL(string: (value["memberHeadImage"] as! String).toResourceSeeURL())
+                    self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
+                }
                 let time = value["commentTime"] as! NSTimeInterval
                 let timeDate = NSDate(timeIntervalSince1970: time/1000)
                 let format = NSDateFormatter()

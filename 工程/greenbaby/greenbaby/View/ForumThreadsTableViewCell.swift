@@ -31,8 +31,11 @@ class ForumThreadsTableViewCell: UITableViewCell, UICollectionViewDelegate,UICol
                 //self.addressLabel.text = value["title"] as? String
                 self.commentLabel.text = "\(value["commentCount"] as! Int)"
                 self.goodLabel.text = "\(value["praiseCount"] as! Int)"
-                let url = NSURL(string: (value["posterHeadImage"] as! String).toResourceSeeURL())
-                self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
+                if value["posterHeadImage"] != nil {
+                    let url = NSURL(string: (value["posterHeadImage"] as! String).toResourceSeeURL())
+                    self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
+                }
+                
                 let time = value["postTime"] as! NSTimeInterval
                 let timeDate = NSDate(timeIntervalSince1970: time/1000)
                 let format = NSDateFormatter()

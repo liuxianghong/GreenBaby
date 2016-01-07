@@ -12,6 +12,7 @@ class ForumCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var imageBackView : UIView!
     
     var dataDic : NSDictionary! {
         willSet{
@@ -22,6 +23,7 @@ class ForumCollectionViewCell: UICollectionViewCell {
                 self.nameLabel.text = value["groupName"] as? String
                 let url = NSURL(string: (value["groupIcon"] as! String).toResourceSeeURL())
                 self.imageView.sd_setImageWithURL(url, placeholderImage: nil)
+                
             }
         }
     }
@@ -47,12 +49,23 @@ class ForumCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         self.backgroundColor = UIColor.clearColor()
-        imageView.backgroundColor = UIColor.greenColor()
+        //imageView.backgroundColor = UIColor.greenColor()
+        
+        //添加边框
+        imageBackView.layer.borderColor = UIColor.mainGreenColor().CGColor;
+        imageBackView.layer.borderWidth = 2.0
+        
+        imageView.layer.masksToBounds = true
+        imageBackView.layer.masksToBounds = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.layer.cornerRadius = imageView.frame.size.width/2;
-        imageView.layer.masksToBounds = true;
+        imageBackView.setNeedsUpdateConstraints()
+        imageBackView.updateConstraintsIfNeeded()
+        imageBackView.setNeedsLayout()
+        imageBackView.layoutIfNeeded()
+        imageView.layer.cornerRadius = imageView.frame.size.width/2
+        imageBackView.layer.cornerRadius = imageBackView.frame.size.width/2
     }
 }

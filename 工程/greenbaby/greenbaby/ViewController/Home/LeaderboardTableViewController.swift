@@ -27,9 +27,8 @@ class LeaderboardTableViewController: UITableViewController {
         frame?.size.height = 50.0
         self.tableView.tableHeaderView?.frame = frame!
         
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
-            self.tableView.mj_header.endRefreshing()
-        })
+        thisWeekClick(thisWeekButton)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +41,9 @@ class LeaderboardTableViewController: UITableViewController {
         lastWeekView.hidden = true
         thisWeekButton.selected = true
         lastWeekButton.selected = false
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+            self.tableView.mj_header.endRefreshing()
+        })
         self.tableView.reloadData()
     }
     
@@ -50,6 +52,7 @@ class LeaderboardTableViewController: UITableViewController {
         lastWeekView.hidden = false
         thisWeekButton.selected = false
         lastWeekButton.selected = true
+        self.tableView.mj_header = nil
         self.tableView.reloadData()
     }
 
@@ -62,7 +65,7 @@ class LeaderboardTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 9
+        return 10
     }
 
     
