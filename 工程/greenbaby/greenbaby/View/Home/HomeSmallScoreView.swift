@@ -37,6 +37,7 @@ class HomeSmallScoreView: UIView {
         self.backgroundColor = UIColor.clearColor()
         self.contanstView.backgroundColor = UIColor.clearColor()
         scoreLabel.text = "0"
+        contanstView.frame = self.bounds
         //self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gesClick"))
     }
     

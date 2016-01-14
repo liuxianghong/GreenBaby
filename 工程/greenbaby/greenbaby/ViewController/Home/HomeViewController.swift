@@ -54,16 +54,17 @@ class HomeViewController: UIViewController {
         }
         threeScoreViewWidthConstraint.constant = threeScoreViewWidth
         
-        scoreView.score = 10
-        scoreDistanceView.score = 10
-        scorePostureView.score = 10
-        scoreTimeView.score = 10
+        
     }
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        scoreView.score = 10
+        scoreDistanceView.score = 10
+        scorePostureView.score = 10
+        scoreTimeView.score = 10
     }
     
     override func viewWillDisappear(animated: Bool) {
