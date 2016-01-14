@@ -159,6 +159,10 @@
 		D340FB6A1C1063EE00011B5B /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB691C1063EE00011B5B /* CompleteTableViewCell.swift */; };
 		D340FB6C1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB6B1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift */; };
 		D340FB6E1C10804C00011B5B /* CompleteValueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340FB6D1C10804C00011B5B /* CompleteValueTableViewController.swift */; };
+		D343FB851C478ED00006DB74 /* HomeScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D343FB841C478ED00006DB74 /* HomeScoreView.xib */; };
+		D343FB871C478EF00006DB74 /* HomeScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343FB861C478EF00006DB74 /* HomeScoreView.swift */; };
+		D343FB891C47F2650006DB74 /* HomeSmallScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343FB881C47F2650006DB74 /* HomeSmallScoreView.swift */; };
+		D343FB8B1C47F2880006DB74 /* HomeSmallScoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D343FB8A1C47F2880006DB74 /* HomeSmallScoreView.xib */; };
 		D34671461C23BD1000ECAEEA /* FileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D34671451C23BD1000ECAEEA /* FileRequest.m */; };
 		D346714A1C23C17F00ECAEEA /* ForumPublishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34671491C23C17F00ECAEEA /* ForumPublishTableViewController.swift */; };
 		D346714E1C23CCA800ECAEEA /* img_tianjia_f.png in Resources */ = {isa = PBXBuildFile; fileRef = D346714B1C23CCA800ECAEEA /* img_tianjia_f.png */; };
@@ -239,6 +243,9 @@
 		D36978C41C1E6E940094921B /* ForumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36978C31C1E6E940094921B /* ForumCollectionViewCell.swift */; };
 		D36978C91C1E87E50094921B /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978C81C1E87E50094921B /* LoginRequest.m */; };
 		D36978CC1C1FAA740094921B /* BannersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978CB1C1FAA740094921B /* BannersRequest.m */; };
+		D38B7FC71C3F76F9003B150C /* KChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */; };
+		D38B7FC91C3F7740003B150C /* KChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC81C3F7740003B150C /* KChartView.swift */; };
+		D38B7FD01C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */; };
 		D3B3180C1C1BF5E300ADE350 /* but_chngxin.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FD1C1BF5E300ADE350 /* but_chngxin.png */; };
 		D3B3180D1C1BF5E300ADE350 /* but_chngxin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FE1C1BF5E300ADE350 /* but_chngxin@2x.png */; };
 		D3B3180E1C1BF5E300ADE350 /* but_chngxin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FF1C1BF5E300ADE350 /* but_chngxin@3x.png */; };
@@ -469,6 +476,10 @@
 		D340FB691C1063EE00011B5B /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
 		D340FB6B1C10719600011B5B /* CompleteMaterialSexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteMaterialSexTableViewCell.swift; sourceTree = "<group>"; };
 		D340FB6D1C10804C00011B5B /* CompleteValueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteValueTableViewController.swift; sourceTree = "<group>"; };
+		D343FB841C478ED00006DB74 /* HomeScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScoreView.xib; sourceTree = "<group>"; };
+		D343FB861C478EF00006DB74 /* HomeScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScoreView.swift; sourceTree = "<group>"; };
+		D343FB881C47F2650006DB74 /* HomeSmallScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSmallScoreView.swift; sourceTree = "<group>"; };
+		D343FB8A1C47F2880006DB74 /* HomeSmallScoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSmallScoreView.xib; sourceTree = "<group>"; };
 		D34671441C23BD1000ECAEEA /* FileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileRequest.h; sourceTree = "<group>"; };
 		D34671451C23BD1000ECAEEA /* FileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileRequest.m; sourceTree = "<group>"; };
 		D34671491C23C17F00ECAEEA /* ForumPublishTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForumPublishTableViewController.swift; sourceTree = "<group>"; };
@@ -552,6 +563,10 @@
 		D36978C81C1E87E50094921B /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 		D36978CA1C1FAA740094921B /* BannersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannersRequest.h; sourceTree = "<group>"; };
 		D36978CB1C1FAA740094921B /* BannersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannersRequest.m; sourceTree = "<group>"; };
+		D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KChartTableViewCell.swift; sourceTree = "<group>"; };
+		D38B7FC81C3F7740003B150C /* KChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KChartView.swift; sourceTree = "<group>"; };
+		D38B7FCE1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+quadCurvedPath.h"; sourceTree = "<group>"; };
+		D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+quadCurvedPath.m"; sourceTree = "<group>"; };
 		D3B317FD1C1BF5E300ADE350 /* but_chngxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = but_chngxin.png; sourceTree = "<group>"; };
 		D3B317FE1C1BF5E300ADE350 /* but_chngxin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "but_chngxin@2x.png"; sourceTree = "<group>"; };
 		D3B317FF1C1BF5E300ADE350 /* but_chngxin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "but_chngxin@3x.png"; sourceTree = "<group>"; };
@@ -669,6 +684,12 @@
 			children = (
 				D32F2E701C16C0CF00A0BEF4 /* LeaderboardTableViewCell.swift */,
 				D316A94C1C31213700B158B8 /* EyeDiaryTableViewCell.swift */,
+				D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */,
+				D38B7FC81C3F7740003B150C /* KChartView.swift */,
+				D343FB841C478ED00006DB74 /* HomeScoreView.xib */,
+				D343FB861C478EF00006DB74 /* HomeScoreView.swift */,
+				D343FB8A1C47F2880006DB74 /* HomeSmallScoreView.xib */,
+				D343FB881C47F2650006DB74 /* HomeSmallScoreView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1099,6 +1120,8 @@
 				D3FF82381C0F371100B92022 /* UIColor+greenbaby.m */,
 				D32F2E771C16DD8600A0BEF4 /* UIBarExtension.swift */,
 				D35A507A1C3A5558007BC2FE /* UIImageExtension.swift */,
+				D38B7FCE1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.h */,
+				D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1357,6 +1380,7 @@
 				D35A50B81C3A689C007BC2FE /* icn_wrong_s@2x.png in Resources */,
 				D32F2EA21C16F8FB00A0BEF4 /* icon_huifu@3x.png in Resources */,
 				D3FAF7011C228BB300CB5925 /* BransView.xib in Resources */,
+				D343FB8B1C47F2880006DB74 /* HomeSmallScoreView.xib in Resources */,
 				D35A50AB1C3A5C28007BC2FE /* icon_up@3x.png in Resources */,
 				D35A50CB1C3AC83E007BC2FE /* bq_yiban@2x.png in Resources */,
 				D35A50A61C3A5C21007BC2FE /* icon_up_click-@2x.png in Resources */,
@@ -1366,6 +1390,7 @@
 				D35A50841C3A5BB7007BC2FE /* btn_shilibiao_click@2x.png in Resources */,
 				D35A50CF1C3ACA9C007BC2FE /* img@2x.png in Resources */,
 				D32F2EBF1C1701A100A0BEF4 /* icon_jinbi_m@2x.png in Resources */,
+				D343FB851C478ED00006DB74 /* HomeScoreView.xib in Resources */,
 				D32F2EAD1C16F99D00A0BEF4 /* icon_tuisong@2x.png in Resources */,
 				D3364C4E1C1B2DA70055C75C /* img_di@3x.png in Resources */,
 				D3364BF31C1B2C1D0055C75C /* but_shuaxin@2x.png in Resources */,
@@ -1533,6 +1558,7 @@
 				D340FB571C0FFB1700011B5B /* MainViewController.swift in Sources */,
 				D340FB681C103F1600011B5B /* CompleteMaterialTableViewController.swift in Sources */,
 				D34671521C23E7F000ECAEEA /* MallViewController.swift in Sources */,
+				D38B7FD01C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m in Sources */,
 				D36978C41C1E6E940094921B /* ForumCollectionViewCell.swift in Sources */,
 				D346714A1C23C17F00ECAEEA /* ForumPublishTableViewController.swift in Sources */,
 				D340FB661C10317700011B5B /* LoginViewController.swift in Sources */,
@@ -1545,6 +1571,7 @@
 				D340FB5C1C101E1900011B5B /* GreenButton.swift in Sources */,
 				D36978C91C1E87E50094921B /* LoginRequest.m in Sources */,
 				D3FAF6F81C227B2800CB5925 /* ForumRequest.m in Sources */,
+				D343FB871C478EF00006DB74 /* HomeScoreView.swift in Sources */,
 				D3BDDEF21C04404E00F06536 /* README.md in Sources */,
 				D340FB6E1C10804C00011B5B /* CompleteValueTableViewController.swift in Sources */,
 				D3FF82321C0F366F00B92022 /* NSString+scisky.m in Sources */,
@@ -1559,6 +1586,7 @@
 				D340FB641C1026CD00011B5B /* README.md in Sources */,
 				D34671461C23BD1000ECAEEA /* FileRequest.m in Sources */,
 				D3B3181D1C1BF74A00ADE350 /* TrainingViewController.swift in Sources */,
+				D38B7FC71C3F76F9003B150C /* KChartTableViewCell.swift in Sources */,
 				D34671761C24007D00ECAEEA /* ChangeNameViewController.swift in Sources */,
 				D32F2E5C1C16B57400A0BEF4 /* HomeViewController.swift in Sources */,
 				D340FB6A1C1063EE00011B5B /* CompleteTableViewCell.swift in Sources */,
@@ -1574,7 +1602,9 @@
 				D3FAF71F1C22C26700CB5925 /* ForumThreadsTableViewCell.swift in Sources */,
 				D36978CC1C1FAA740094921B /* BannersRequest.m in Sources */,
 				D35A50C01C3A721E007BC2FE /* VSInspectionCollectionViewCell.swift in Sources */,
+				D38B7FC91C3F7740003B150C /* KChartView.swift in Sources */,
 				D316A94D1C31213700B158B8 /* EyeDiaryTableViewCell.swift in Sources */,
+				D343FB891C47F2650006DB74 /* HomeSmallScoreView.swift in Sources */,
 				D340FB611C1025FF00011B5B /* WelcomeViewController.swift in Sources */,
 				D3FAF6FC1C228B3600CB5925 /* BransView.swift in Sources */,
 				D3364BC31C1ABB8C0055C75C /* WIFIAddTableViewController.swift in Sources */,

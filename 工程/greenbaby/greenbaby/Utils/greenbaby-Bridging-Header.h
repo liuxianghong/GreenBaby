@@ -14,3 +14,4 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "UIImageView+WebCache.h"
 #import "NSString+scisky.h"
+#import "UIBezierPath+quadCurvedPath.h"

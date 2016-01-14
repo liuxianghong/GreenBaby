@@ -69,7 +69,7 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
                 self.wxLoginModel.iconURL = snsAccount!.iconURL
                 
                 let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
-                let dic = ["type": 0,"wxId": (snsAccount?.openId)! as String]
+                let dic = ["type": 0,"wxId": (snsAccount?.unionId)! as String]
                 print(dic)
                 LoginRequest.UserLoginWithParameters(dic, success: { (object : AnyObject!) -> Void in
                     print(object)
