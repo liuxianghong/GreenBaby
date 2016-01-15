@@ -61,10 +61,10 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        scoreView.score = 10
-        scoreDistanceView.score = 10
-        scorePostureView.score = 10
-        scoreTimeView.score = 10
+        scoreView.score = 35
+        scoreDistanceView.score = 35
+        scorePostureView.score = 35
+        scoreTimeView.score = 35
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -73,10 +73,10 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func shareClicked(sender: UIButton) {
-        scoreView.score = scoreView.score + 10
-        scoreDistanceView.score = scoreDistanceView.score + 10
-        scorePostureView.score = scorePostureView.score + 10
-        scoreTimeView.score = scoreTimeView.score + 10
+//        scoreView.score = scoreView.score + 10
+//        scoreDistanceView.score = scoreDistanceView.score + 10
+//        scorePostureView.score = scorePostureView.score + 10
+//        scoreTimeView.score = scoreTimeView.score + 10
     }
 
     override func didReceiveMemoryWarning() {

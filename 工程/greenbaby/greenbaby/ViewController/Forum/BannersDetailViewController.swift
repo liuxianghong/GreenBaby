@@ -12,14 +12,16 @@ class BannersDetailViewController: UIViewController {
 
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var titleLabel : UILabel!
-    @IBOutlet weak var constLabel : UILabel!
+    //@IBOutlet weak var constLabel : UILabel!
+    @IBOutlet weak var webView : UIWebView!
     var dic : NSDictionary!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        webView.backgroundColor = UIColor.whiteColor()
         self.titleLabel.text = dic["title"] as? String
-        self.constLabel.text = ""
+        //self.constLabel.text = ""
         let url = NSURL(string: (dic["thumbnail"] as! String).toResourceSeeURL())
         self.imageView.sd_setImageWithURL(url, placeholderImage: nil)
         let dicBanner : Dictionary<String,AnyObject> = ["id":dic["id"]!]
@@ -30,7 +32,8 @@ class BannersDetailViewController: UIViewController {
             if state == 0{
                 let dataDic = dic["data"] as! NSDictionary
                 let content = dataDic["content"] as! String
-                self.constLabel.text = content
+                self.webView.loadHTMLString(content, baseURL: nil)
+                //self.constLabel.text = content
             }
             }) { (error : NSError!) -> Void in
                 print(error)
