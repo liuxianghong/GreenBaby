@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		17959B166FE829CA09372B29 /* libPods-greenbaby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */; };
+		D30FD0161C4BFB390060D230 /* WIFIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30FD0151C4BFB390060D230 /* WIFIUtils.swift */; };
 		D316A9471C31076E00B158B8 /* KTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D316A9461C31076E00B158B8 /* KTableViewController.swift */; };
 		D316A9491C311A9E00B158B8 /* ImageSeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D316A9481C311A9E00B158B8 /* ImageSeeViewController.swift */; };
 		D316A94B1C311D4B00B158B8 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D316A94A1C311D4B00B158B8 /* CaptureViewController.swift */; };
@@ -308,6 +309,7 @@
 		0D4DCCD081CD4E75E46DCE15 /* Pods-greenbaby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.release.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.release.xcconfig"; sourceTree = "<group>"; };
 		4B19FA17423FF07A412B0E4B /* Pods-greenbaby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-greenbaby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-greenbaby/Pods-greenbaby.debug.xcconfig"; sourceTree = "<group>"; };
 		CCF3BEB9EE65DEA55FEF0001 /* libPods-greenbaby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-greenbaby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30FD0151C4BFB390060D230 /* WIFIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIFIUtils.swift; sourceTree = "<group>"; };
 		D316A9461C31076E00B158B8 /* KTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KTableViewController.swift; sourceTree = "<group>"; };
 		D316A9481C311A9E00B158B8 /* ImageSeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSeeViewController.swift; sourceTree = "<group>"; };
 		D316A94A1C311D4B00B158B8 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				D35A507A1C3A5558007BC2FE /* UIImageExtension.swift */,
 				D38B7FCE1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.h */,
 				D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */,
+				D30FD0151C4BFB390060D230 /* WIFIUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1600,6 +1603,7 @@
 				D3364BB51C1AA5A40055C75C /* UMHelp.m in Sources */,
 				D3364BC71C1AC0070055C75C /* QRCodeViewController.swift in Sources */,
 				D3FAF71F1C22C26700CB5925 /* ForumThreadsTableViewCell.swift in Sources */,
+				D30FD0161C4BFB390060D230 /* WIFIUtils.swift in Sources */,
 				D36978CC1C1FAA740094921B /* BannersRequest.m in Sources */,
 				D35A50C01C3A721E007BC2FE /* VSInspectionCollectionViewCell.swift in Sources */,
 				D38B7FC91C3F7740003B150C /* KChartView.swift in Sources */,

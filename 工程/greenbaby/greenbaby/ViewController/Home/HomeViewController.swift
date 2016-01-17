@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
             threeScoreBackViewHeightConstraint.constant = threeScoreBackViewHeightConstraint.constant - threeScoreNeedMoveHeight
         }
         threeScoreViewWidthConstraint.constant = threeScoreViewWidth
-        
+        print(WIFIUtils.fetchSSIDInfo()!)
         
     }
     
