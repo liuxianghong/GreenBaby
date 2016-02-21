@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var codeButton : UIButton!
     @IBOutlet weak var nextButton : UIButton!
-    var type : Int = 1
+    var type : Int = 0
     var wxLoginModel = WXLoginModel()
     
     var countDownTimer : NSTimer!
@@ -31,6 +31,10 @@ class LoginViewController: UIViewController {
             self.navigationItem.rightBarButtonItem = nil
             titleLabel.text = "手机号码"
             nextButton.setTitle("登录", forState: .Normal)
+        }
+        else if type == 0{
+            self.navigationItem.rightBarButtonItem?.title = "取消"
+            nextButton.setTitle("绑定", forState: .Normal)
         }
         self.navigationItem.backBarButtonItem = UIBarButtonItem();
         self.navigationItem.backBarButtonItem?.title = "返回"
@@ -85,15 +89,21 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func jumpOutClicked(sender: AnyObject) {
-        self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
-//        if type == 3{
-//            self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
-//        }
-//        else{
-//            self.dismissViewControllerAnimated(true, completion: { () -> Void in
-//            })
-//        }
+    @IBAction func jumpOutClicked(sender: AnyObject?) {
+        if type == 0{
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                
+            })
+        }
+        else{
+            if let province = UserInfo.CurrentUser().province{
+                if !province.isEmpty{
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    return
+                }
+            }
+            self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
+        }
     }
     
     @IBAction func codeClicked(sender: AnyObject) {
@@ -140,21 +150,21 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func nextClicked(sender: AnyObject) {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+        if !self.phoneNumberTextField.text!.checkTel() {
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入正确的手机号码"
+            hud.hide(true, afterDelay: 1.5)
+            return
+        }
+        
+        if self.codeTextField.text!.isEmpty {
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入验证码"
+            hud.hide(true, afterDelay: 1.5)
+            return
+        }
         if type != 1{
-            let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
-            if !self.phoneNumberTextField.text!.checkTel() {
-                hud.mode = .Text
-                hud.detailsLabelText = "请输入正确的手机号码"
-                hud.hide(true, afterDelay: 1.5)
-                return
-            }
-            
-            if self.codeTextField.text!.isEmpty {
-                hud.mode = .Text
-                hud.detailsLabelText = "请输入验证码"
-                hud.hide(true, afterDelay: 1.5)
-                return
-            }
             let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
             let dic :NSDictionary = ["mobile": self.phoneNumberTextField.text!,"vCode" : self.codeTextField.text!,"userId" : userId!]
             print(dic)
@@ -163,14 +173,18 @@ class LoginViewController: UIViewController {
                 let dic:NSDictionary = object as! NSDictionary
                 let state:Int = dic["state"] as! Int
                 if state == 0{
-                    self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
-//                    if self.type == 2{
-//                        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-//                        })
-//                    }
-//                    else{
-//                        self.performSegueWithIdentifier("moreInformationIdentifier", sender: nil)
-//                    }
+                    hud.hide(true)
+                    self.jumpOutClicked(nil)
+                }
+                else{
+                    if let str = dic["data"] as? String{
+                        hud.mode = .Text
+                        hud.detailsLabelText = str
+                        hud.hide(true, afterDelay: 1.5)
+                    }
+                    else{
+                        hud.hide(true)
+                    }
                 }
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
@@ -181,8 +195,7 @@ class LoginViewController: UIViewController {
             
         }
         else {
-            let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
-            let dic = ["type": 0,"mobile": self.phoneNumberTextField.text!,"vCode" : self.codeTextField.text!]
+            let dic = ["type": 1,"mobile": self.phoneNumberTextField.text!,"vCode" : self.codeTextField.text!]
             print(dic)
             LoginRequest.UserLoginWithParameters(dic, success: { (object : AnyObject!) -> Void in
                 print(object)
@@ -190,21 +203,20 @@ class LoginViewController: UIViewController {
                 let state:Int = dic["state"] as! Int
                 if state == 0{
                     let dicdata:NSDictionary = dic["data"] as! NSDictionary
-                    let userId = String(dicdata["userId"] as! Int)
-                    let userName = dicdata["userName"] as! String
-                    let gold = dicdata["gold"] as! Int
-                    NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "userId")
-                    NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
-                    NSUserDefaults.standardUserDefaults().setObject(gold, forKey: "gold")
-                    NSUserDefaults.standardUserDefaults().synchronize()
+                    UserInfo.setUser(dicdata)
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                     })
                     hud.hide(true)
                 }
                 else{
-                    hud.mode = .Text
-                    hud.detailsLabelText = dic["description"] as! String
-                    hud.hide(true, afterDelay: 1.5)
+                    if let str = dic["data"] as? String{
+                        hud.mode = .Text
+                        hud.detailsLabelText = str
+                        hud.hide(true, afterDelay: 1.5)
+                    }
+                    else{
+                        hud.hide(true)
+                    }
                 }
                 
                 }) { (error : NSError!) -> Void in

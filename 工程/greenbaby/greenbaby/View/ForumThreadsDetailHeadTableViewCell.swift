@@ -36,6 +36,7 @@ class ForumThreadsDetailHeadTableViewCell: UITableViewCell, UICollectionViewDele
                     let url = NSURL(string: (value["posterHeadImage"] as! String).toResourceSeeURL())
                     self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
                 }
+                self.addressLabel.text = value["posterLocation"] as? String
                 let time = value["postTime"] as! NSTimeInterval
                 let timeDate = NSDate(timeIntervalSince1970: time/1000)
                 let format = NSDateFormatter()

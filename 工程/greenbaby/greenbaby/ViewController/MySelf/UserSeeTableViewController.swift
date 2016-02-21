@@ -13,6 +13,10 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var headImageView : UIImageView!
     @IBOutlet weak var sexLabel : UILabel!
+    @IBOutlet weak var eyeSightLabel : UILabel!
+    @IBOutlet weak var cityLabel : UILabel!
+    @IBOutlet weak var averageTimeLabel : UILabel!
+    @IBOutlet weak var ageLabel : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,11 +32,16 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
             headImageView.layer.masksToBounds = true;
             headImageView.sd_setImageWithURL(NSURL(string: (NSUserDefaults.standardUserDefaults().objectForKey("headImage") as! String).toResourceSeeURL()))
         }
+        self.sexLabel.text = UserInfo.CurrentUser().sex == 0 ? "男" : "女"
+        self.averageTimeLabel.text = UserInfo.CurrentUser().averageTime
+        self.cityLabel.text = UserInfo.CurrentUser().province! + " " + UserInfo.CurrentUser().city!
+        self.eyeSightLabel.text = UserInfo.CurrentUser().eyeSight
+        self.ageLabel.text = UserInfo.CurrentUser().age
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.nameLabel.text = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
+        self.nameLabel.text = UserInfo.CurrentUser().userName
     }
     
     override func didReceiveMemoryWarning() {

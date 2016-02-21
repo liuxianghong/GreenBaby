@@ -13,6 +13,8 @@
 
 + (void)GetForumThreadsInGroupWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
++ (void)GetForumThreadsInGroupPageWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
 + (void)GetForumThreadsDetailWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 + (void)UpdateForumCommentWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
@@ -23,4 +25,5 @@
 
 + (void)GetMyThreadWithParameters: (id)parameters post:(BOOL)post success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
++ (void)GetMyThreadPageWithParameters: (id)parameters post:(BOOL)post success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 @end

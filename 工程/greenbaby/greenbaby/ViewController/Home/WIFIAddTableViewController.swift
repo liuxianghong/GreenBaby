@@ -8,8 +8,10 @@
 
 import UIKit
 
-class WIFIAddTableViewController: UITableViewController {
+class WIFIAddTableViewController: UITableViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var ssidTF : UITextField!
+    @IBOutlet weak var ssidPWTF : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +22,10 @@ class WIFIAddTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         var frame = self.tableView.tableHeaderView?.frame
-        frame?.size.height = 30.0
+        frame?.size.height = 40.0
         self.tableView.tableHeaderView?.frame = frame!
-        self.tableView.tableFooterView  = UIView()
+        //self.tableView.tableFooterView  = UIView()
+        self.ssidTF.text = WIFIUtils.fetchSSIDInfo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,48 +33,64 @@ class WIFIAddTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func doneClick(sneder : AnyObject){
+        if self.ssidTF.text!.isEmpty{
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.detailsLabelText = "请输入Wi-Fi名称"
+            hud.mode = .Text
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        let str = "S:\(self.ssidTF.text!);T:WPA/WPA2;P:\(self.ssidPWTF.text!);H:\(UserInfo.CurrentUser().mobile!);"
+        self.performSegueWithIdentifier("qecodeIdentifier", sender: str)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
+//
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 1
+//    }
+//
+//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0
+//    }
+//    
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier("wifiCellIdentifier", forIndexPath: indexPath)
+//
+//        // Configure the cell...
+//
+//        return cell
+//    }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("wifiCellIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
-
-        return cell
-    }
-    
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let avc = UIAlertController(title: "tomoto", message: nil, preferredStyle: .Alert)
-        avc.addTextFieldWithConfigurationHandler { (tf : UITextField) -> Void in
-            tf.placeholder = "密码"
-        }
-        let action = UIAlertAction(title: "连接", style: .Default, handler: { (UIAlertAction) -> Void in
-            self.performSegueWithIdentifier("qecodeIdentifier", sender: nil)
-        })
-        let action2 = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
-        })
-        avc.addAction(action)
-        avc.addAction(action2)
-        self.presentViewController(avc, animated: true, completion: { () -> Void in
-            
-        })
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        let avc = UIAlertController(title: "tomoto", message: nil, preferredStyle: .Alert)
+//        avc.addTextFieldWithConfigurationHandler { (tf : UITextField) -> Void in
+//            tf.placeholder = "密码"
+//        }
+//        let action = UIAlertAction(title: "连接", style: .Default, handler: { (UIAlertAction) -> Void in
+//            self.performSegueWithIdentifier("qecodeIdentifier", sender: nil)
+//        })
+//        let action2 = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+//        })
+//        avc.addAction(action)
+//        avc.addAction(action2)
+//        self.presentViewController(avc, animated: true, completion: { () -> Void in
+//            
+//        })
+//    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -107,14 +126,16 @@ class WIFIAddTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "qecodeIdentifier"{
+            let vc = segue.destinationViewController as! QRCodeViewController
+            vc.str = sender as! String
+        }
     }
-    */
 
 }

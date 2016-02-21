@@ -14,6 +14,8 @@ class LeaderboardTableViewController: UITableViewController {
     @IBOutlet weak var lastWeekView : UIView!
     @IBOutlet weak var thisWeekButton : UIButton!
     @IBOutlet weak var lastWeekButton : UIButton!
+    var lastWeekData : [[String : AnyObject]] = []
+    var thisWeekData : [[String : AnyObject]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,16 @@ class LeaderboardTableViewController: UITableViewController {
         var frame = self.tableView.tableHeaderView?.frame
         frame?.size.height = 50.0
         self.tableView.tableHeaderView?.frame = frame!
+        self.tableView.tableFooterView = UIView()
         
         thisWeekClick(thisWeekButton)
+        loadData(true)
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.mj_header.beginRefreshing()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +51,7 @@ class LeaderboardTableViewController: UITableViewController {
         thisWeekButton.selected = true
         lastWeekButton.selected = false
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
-            self.tableView.mj_header.endRefreshing()
+            self.loadData(false)
         })
         self.tableView.reloadData()
     }
@@ -54,6 +63,42 @@ class LeaderboardTableViewController: UITableViewController {
         lastWeekButton.selected = true
         self.tableView.mj_header = nil
         self.tableView.reloadData()
+        self.loadData(true)
+    }
+    
+    @IBAction func shareClicked(sender: UIButton) {
+        self.tabBarController?.performSegueWithIdentifier("shareIdentifier", sender: UIImage.imageWith(self.view))
+    }
+    
+    func loadData(lastWeek : Bool){
+        var condition = [String:AnyObject]()
+        if lastWeek{
+            condition["lastWeek"] = 1
+        }
+        let dic = ["currentPage" : 1,"condition" : condition]
+        DeviceRequest.GetRankingWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            if self.tableView.mj_header != nil{
+                self.tableView.mj_header.endRefreshing()
+            }
+            
+            let state = object["state"] as! Int
+            if state == 0{
+                if let data = object["data"] as? [[String : AnyObject]]{
+                    if lastWeek{
+                        self.lastWeekData = data
+                    }
+                    else{
+                        self.thisWeekData = data
+                    }
+                }
+            }
+            self.tableView.reloadData()
+            }) { (error : NSError!) -> Void in
+                if self.tableView.mj_header != nil{
+                    self.tableView.mj_header.endRefreshing()
+                }
+        }
     }
 
     // MARK: - Table view data source
@@ -65,7 +110,10 @@ class LeaderboardTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        if thisWeekButton.selected{
+            return thisWeekData.count
+        }
+        return lastWeekData.count
     }
 
     
@@ -74,7 +122,13 @@ class LeaderboardTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.isLastWeek = thisWeekView.hidden
-        cell.number = indexPath.row+1
+        if thisWeekButton.selected{
+            cell.data = thisWeekData[indexPath.row]
+        }
+        else{
+            cell.data = lastWeekData[indexPath.row]
+        }
+
         return cell
     }
 

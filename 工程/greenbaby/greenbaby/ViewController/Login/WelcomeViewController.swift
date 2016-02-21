@@ -77,15 +77,8 @@ class WelcomeViewController: UIViewController ,UMSocialUIDelegate{
                     let state:Int = dic["state"] as! Int
                     if state == 0{
                         let dicdata:NSDictionary = dic["data"] as! NSDictionary
-                        let userId = String(dicdata["userId"] as! Int)
-                        let userName = dicdata["userName"] as! String
-                        let gold = dicdata["gold"] as! Int
+                        UserInfo.setUser(dicdata)
                         let binded = dicdata["binded"] as! Int
-                        NSUserDefaults.standardUserDefaults().setObject(dicdata["headImage"], forKey: "headImage")
-                        NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "userId")
-                        NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "userName")
-                        NSUserDefaults.standardUserDefaults().setObject(gold, forKey: "gold")
-                        NSUserDefaults.standardUserDefaults().synchronize()
                         if binded == 0{
                             self.performSegueWithIdentifier("wxinIdentifier", sender: 2)
                         }

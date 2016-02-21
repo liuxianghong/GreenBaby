@@ -14,7 +14,10 @@ class BannersViewController: UIViewController,UITableViewDataSource,UITableViewD
     @IBOutlet weak var bransView : BransView!
     var dataArray : NSArray!
     var bannersState = 1
-    var tableViewArray = NSArray()
+    var tableViewArray = [Dictionary<String,AnyObject>]()
+    let maxIdex = 10
+    var page = 1
+    var first = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,26 +27,63 @@ class BannersViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         self.tableView.tableFooterView = UIView()
         
-        BannersRequest.GetBannersNoPageWithParameters(nil, success: { (object) -> Void in
-            print(object)
-            let dic:NSDictionary = object as! NSDictionary
-            self.bannersState = dic["state"] as! Int
-            if self.bannersState == 0{
-                self.tableViewArray = dic["data"] as! NSArray
-                self.tableView.reloadData()
-            }
-            }) { (error : NSError!) -> Void in
-                print(error)
-        }
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+            self.page = 1
+            self.loadData()
+            
+        })
+        
+        self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { () -> Void in
+            self.page++
+            self.loadData()
+        })
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if first {
+            first = false
+            self.tableView.mj_header.beginRefreshing()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadData(){
+        let dic = ["currentPage": page,"pageSize": 10]
+        BannersRequest.GetBannersPageWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            let dic:NSDictionary = object as! NSDictionary
+            self.bannersState = dic["state"] as! Int
+            if self.bannersState == 0{
+                if self.page == 1{
+                    self.tableViewArray = dic["data"] as! Array<Dictionary<String,AnyObject>>
+                }
+                else{
+                    self.tableViewArray.appendContentsOf(dic["data"] as! Array<Dictionary<String,AnyObject>>)
+                }
+                if dic["data"]?.count < self.maxIdex{
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                else{
+                    self.tableView.mj_footer.endRefreshing()
+                }
+            }
+            else{
+                self.tableView.mj_footer.endRefreshing()
+            }
+            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+            
+            }) { (error : NSError!) -> Void in
+                print(error)
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_footer.endRefreshing()
+        }
     }
     
     // MARK: - BransViewDelegate

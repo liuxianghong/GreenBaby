@@ -81,7 +81,7 @@ class ForumPublishTableViewController: UITableViewController,UIImagePickerContro
             return
         }
         let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
-        let dicP : Dictionary<String,AnyObject> = ["groupId" : groupId,"userId" : userId!,"title": self.titleTextField.text!,"content": self.contentTextView.text!,"location" : "武汉","images" : imageNameArray]
+        let dicP : Dictionary<String,AnyObject> = ["groupId" : groupId,"userId" : userId!,"title": self.titleTextField.text!,"content": self.contentTextView.text!,"location" : UserInfo.CurrentUser().city!,"images" : imageNameArray]
         ForumRequest.PostForumThreadWithParameters(dicP, success: { (object) -> Void in
             print(object)
             let dicd:NSDictionary = object as! NSDictionary

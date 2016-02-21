@@ -11,11 +11,12 @@ import UIKit
 class QRCodeViewController: UIViewController {
 
     @IBOutlet weak var imageView : UIImageView!
+    var str = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        imageView.image = QRCodeGenerate.generateQRCode("11111111", size: self.view.frame.size.width/2)
+        imageView.image = QRCodeGenerate.generateQRCode(str, size: self.view.frame.size.width/2)
     }
 
     override func didReceiveMemoryWarning() {

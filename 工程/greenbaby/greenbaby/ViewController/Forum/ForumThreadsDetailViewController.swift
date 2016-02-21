@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ForumThreadsDetailVCDelegate : NSObjectProtocol{
+    func didPraiseOrCommplate(index : Int,dic : [String : AnyObject])
+}
+
 class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource{
 
     var dic : [String : AnyObject]!
@@ -15,6 +19,8 @@ class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIS
     var commentNumber : Int = 0
     var dataDic : NSDictionary! = NSDictionary()
     var commentsArray : NSArray! = NSArray()
+    var index = 0
+    weak var forumThreadsDetailVCDelegate : ForumThreadsDetailVCDelegate!
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var inputTextView : UIView!
     @IBOutlet weak var inputField : UITextView!
@@ -127,6 +133,7 @@ class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIS
                 }
                 self.dic["praiseCount"] = self.goodNumber
                 self.tableView.reloadData()
+                self.forumThreadsDetailVCDelegate.didPraiseOrCommplate(self.index, dic: self.dic)
             }else{
             }
             }) { (error : NSError!) -> Void in
@@ -142,7 +149,7 @@ class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIS
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
-        let dicP : Dictionary<String,AnyObject> = ["forumId" : self.dic["threadId"]!,"userId" : userId!,"submit": true,"location": "武汉","comment" : self.inputField.text!]
+        let dicP : Dictionary<String,AnyObject> = ["forumId" : self.dic["threadId"]!,"userId" : userId!,"submit": true,"location": UserInfo.CurrentUser().city!,"comment" : self.inputField.text!]
         ForumRequest.UpdateForumCommentWithParameters(dicP, success: { (object) -> Void in
             print(object)
             let dicd:NSDictionary = object as! NSDictionary
@@ -155,6 +162,7 @@ class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIS
                 self.inputConstraint.constant = self.inputField.contentSize.height
                 self.commentNumber++
                 self.dic["commentCount"] = self.commentNumber
+                self.forumThreadsDetailVCDelegate.didPraiseOrCommplate(self.index, dic: self.dic)
                 self.loadData(false)
             }else{
                 hud.mode = .Text

@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ThreadsTableViewController: UITableViewController {
+class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
 
     var first : Bool = true
-    var tableViewArray : NSArray = NSArray()
+    var tableViewArray = [Dictionary<String,AnyObject>]()
+    let maxIdex = 10
+    var page = 1
     var type = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,38 +31,94 @@ class ThreadsTableViewController: UITableViewController {
         
         self.title = type == 0 ? "我的发布" : "我的回复"
         
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+            self.page = 1
+            self.loadData()
+            
+        })
+        
+        self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { () -> Void in
+            self.page++
+            self.loadData()
+        })
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        
-        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
-        let dicP : Dictionary<String,AnyObject> = ["userId" : userId!]
-        let bo = type == 0 ? true : false
-        ForumRequest.GetMyThreadWithParameters(dicP, post: bo,success: { (object) -> Void in
-            print(object)
-            let dic:NSDictionary = object as! NSDictionary
-            let state:Int = dic["state"] as! Int
-            if state == 0{
-                self.tableViewArray = dic["data"] as! NSArray
-                self.tableView.reloadData()
-                hud.hide(true)
-            }else{
-                hud.mode = .Text
-                hud.detailsLabelText = dic["description"] as! String
-                hud.hide(true, afterDelay: 1.5)
-            }
-            }) { (error : NSError!) -> Void in
-                hud.mode = .Text
-                hud.detailsLabelText = error.domain
-                hud.hide(true, afterDelay: 1.5)
+        if first {
+            first = false
+            self.tableView.mj_header.beginRefreshing()
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadData(){
+        
+        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
+        let dicP : Dictionary<String,AnyObject> = ["userId" : userId!]
+        let bo = type == 0 ? true : false
+        
+        let dic : Dictionary<String,AnyObject> = ["condition" : dicP,"currentPage": page,"pageSize": maxIdex]
+        ForumRequest.GetMyThreadPageWithParameters(dic, post: bo,success: { (object) -> Void in
+            print(object)
+            let dic:NSDictionary = object as! NSDictionary
+            let state = dic["state"] as! Int
+            if state == 0{
+                if self.page == 1{
+                    self.tableViewArray = dic["data"] as! Array<Dictionary<String,AnyObject>>
+                }
+                else{
+                    self.tableViewArray.appendContentsOf(dic["data"] as! Array<Dictionary<String,AnyObject>>)
+                }
+                if dic["data"]?.count < self.maxIdex{
+                    self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                else{
+                    self.tableView.mj_footer.endRefreshing()
+                }
+            }
+            else{
+//                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+//                hud.mode = .Text
+//                if let hudStr = dic["data"] as? String{
+//                    hud.detailsLabelText = hudStr
+//                }
+//                else{
+//                    hud.detailsLabelText = dic["description"] as? String
+//                }
+//                
+//                hud.hide(true, afterDelay: 1.5)
+                self.tableView.mj_footer.endRefreshing()
+            }
+            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+            
+            }) { (error : NSError!) -> Void in
+                print(error)
+                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain
+                hud.hide(true, afterDelay: 1.5)
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_footer.endRefreshing()
+        }
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowTouch(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "暂无帖子")
     }
 
     // MARK: - Table view data source
@@ -81,7 +139,7 @@ class ThreadsTableViewController: UITableViewController {
 
         // Configure the cell...
 
-        cell.dataDic = tableViewArray[indexPath.row] as! NSDictionary
+        cell.dataDic = tableViewArray[indexPath.row]
         return cell
     }
 

@@ -46,9 +46,6 @@ class LeaderboardTableViewCell: UITableViewCell {
                 self.scoreLabel.textColor = UIColor.darkGrayColor()
                 self.moneyImageView.highlighted = false
             }
-            if value == 5{
-                isMe = true
-            }
         }
     }
     
@@ -63,6 +60,23 @@ class LeaderboardTableViewCell: UITableViewCell {
             else
             {
                 self.contentView.backgroundColor = UIColor.whiteColor()
+            }
+        }
+    }
+    
+    var data : [String : AnyObject]?{
+        willSet{
+            guard let value = newValue else{
+                return
+            }
+            isMe = UserInfo.CurrentUser().userId == value["userId"] as? Int
+            number = value["rank"] as? Int
+            nameLabel.text = value["name"] as? String
+            addressLabel.text = value["address"] as? String
+            scoreLabel.text = "\(value["score"] as! Float)"
+            if let headImage = value["headImage"] as? String {
+                let url = NSURL(string: headImage.toResourceSeeURL())
+                self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
             }
         }
     }

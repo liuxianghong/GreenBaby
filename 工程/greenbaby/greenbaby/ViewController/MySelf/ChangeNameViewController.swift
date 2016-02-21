@@ -16,7 +16,7 @@ class ChangeNameViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.nameField.text = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
+        self.nameField.text = UserInfo.CurrentUser()?.userName
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,8 +36,8 @@ class ChangeNameViewController: UIViewController {
             return
         }
         
-        let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")!
-        let dic :NSDictionary = ["userId": userId,"nickName": nameField.text!]
+        let userId = UserInfo.CurrentUser()?.userId
+        let dic :NSDictionary = ["userId": userId!,"nickName": nameField.text!]
         LoginRequest.UpdateEndUserWithParameters(dic, success: { (object) -> Void in
             let dic:NSDictionary = object as! NSDictionary
             let state:Int = dic["state"] as! Int
@@ -46,7 +46,7 @@ class ChangeNameViewController: UIViewController {
                 hud.detailsLabelText = "修改成功"
                 hud.hide(true, afterDelay: 1.5)
                 self.navigationController?.popViewControllerAnimated(true)
-                NSUserDefaults.standardUserDefaults().setObject(self.nameField.text!, forKey: "userName")
+                UserInfo.CurrentUser().userName = self.nameField.text
                 NSUserDefaults.standardUserDefaults().synchronize()
             }else{
                 hud.mode = .Text

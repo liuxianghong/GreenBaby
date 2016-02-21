@@ -22,7 +22,7 @@ class HomeScoreView: UIView {
     @IBOutlet weak var pointImageView : UIImageView!
     @IBOutlet weak var scoreLabel : UILabel!
     let initAngle : CGFloat = 54.45
-    var score : Int! = 0{
+    var score : Float! = 0{
         willSet{
             guard let value = newValue else{
                 return
@@ -47,7 +47,7 @@ class HomeScoreView: UIView {
         doScore(score)
     }
     
-    func doScore(sc : Int){
+    func doScore(sc : Float){
         let path = UIBezierPath(arcCenter: CGPointMake(self.scoreImageView.frame.size.width/2, self.scoreImageView.frame.size.height/2), radius: self.scoreImageView.frame.size.width/2, startAngle: CGFloat(90 - self.initAngle) * CGFloat(M_PI/180.0), endAngle: (CGFloat(-sc) * (360 - 2 * self.initAngle) / 100 + (90 - self.initAngle)) * CGFloat(M_PI/180.0), clockwise: false)
         path.addLineToPoint(CGPointMake(self.scoreImageView.frame.size.width/2, self.scoreImageView.frame.size.height/2))
         path.closePath()

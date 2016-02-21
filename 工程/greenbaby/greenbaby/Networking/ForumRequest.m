@@ -11,12 +11,15 @@
 
 #define kMethodGetForumGroup @"/forum/getForumGroup"
 #define kMethodGetForumThreadsInGroup @"/forum/getForumThreadsInGroup"
+#define kMethodGetForumThreadsInGroupPage @"/forum/getForumThreadsInGroupPage"
 #define kMethodGetForumThreadsDetail @"/forum/getForumThreadDetail"
 #define kMethodUpdateForumComment @"/forum/updateForumComment"
 #define kMethodUpdateForumPraise @"/forum/updateForumPraise"
 #define kMethodPostForumThread @"/forum/postForumThread"
 #define kMethodGetSelfPostForumThread @"/forum/getSelfPostForumThread"
 #define kMethodGetSelfReplyForumThread @"/forum/getSelfReplyForumThread"
+#define kMethodGetSelfPostForumThreadPage @"/forum/getSelfPostForumThreadPage"
+#define kMethodGetSelfReplyForumThreadPage @"/forum/getSelfReplyForumThreadPage"
 
 @implementation ForumRequest
 + (void)GetForumGroupWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
@@ -27,6 +30,11 @@
 + (void)GetForumThreadsInGroupWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
 {
     [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetForumThreadsInGroup WithParameters:parameters post:YES success:success failure:failure];
+}
+
++ (void)GetForumThreadsInGroupPageWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
+{
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetForumThreadsInGroupPage WithParameters:parameters post:YES success:success failure:failure];
 }
 
 
@@ -54,6 +62,10 @@
     [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:method WithParameters:parameters post:YES success:success failure:failure];
 }
 
++ (void)GetMyThreadPageWithParameters: (id)parameters post:(BOOL)post success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    NSString *method = post ? kMethodGetSelfPostForumThreadPage : kMethodGetSelfReplyForumThreadPage;
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:method WithParameters:parameters post:YES success:success failure:failure];
+}
 
 
 @end

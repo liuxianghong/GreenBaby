@@ -76,9 +76,28 @@ class VSInspectionViewController: UIViewController,UICollectionViewDelegate,UICo
         doAnimation(true)
     }
     
+    @IBAction func swipLeftClick(sender : AnyObject){
+        check(1)
+    }
+    
+    @IBAction func swipRightClick(sender : AnyObject){
+        check(2)
+    }
+    
+    @IBAction func swipUpClick(sender : AnyObject){
+        check(3)
+    }
+    
+    @IBAction func swipDownClick(sender : AnyObject){
+        check(4)
+    }
+    
     @IBAction func checkClick(sender : UIButton){
-       
-        if sender.tag == tagIndex{
+        check(sender.tag)
+    }
+    
+    func check(tag : Int){
+        if tag == tagIndex{
             if index >= 13{
                 self.performSegueWithIdentifier("VSInspectionResultIndentifier", sender: 13)
                 return

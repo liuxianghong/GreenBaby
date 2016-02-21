@@ -12,4 +12,6 @@
 
 @interface UMHelp : NSObject
 +(void)loginUMSocialSnsPlatform:(UMSocialSnsPlatform *)snsPlatform vc:(UIViewController *)presentingController server:(UMSocialControllerService *)socialControllerService isPresent:(BOOL)isPresentInController completion:(void (^)(UMSocialResponseEntity * response))completion;
+
++(void)postSNSWithTypes:(NSArray *)platformTypes content:(NSString *)content image:(id)image presentedController:(UIViewController *)presentedController completion:(void (^)(UMSocialResponseEntity * response))completion;
 @end

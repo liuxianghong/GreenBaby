@@ -68,12 +68,12 @@ class MySelfTableViewController: UITableViewController {
             self.loginButton.hidden = true
             self.nameLabel.hidden = false
             self.addressLabel.hidden = false
+            self.moneyLabel.hidden = false
             
-            self.nameLabel.text = NSUserDefaults.standardUserDefaults().objectForKey("userName") as? String
-            let gold = NSUserDefaults.standardUserDefaults().objectForKey("gold") as! Int
-            self.moneyLabel.text = "\(gold)"
-            if NSUserDefaults.standardUserDefaults().objectForKey("headImage") != nil{
-                headImageView.sd_setImageWithURL(NSURL(string: (NSUserDefaults.standardUserDefaults().objectForKey("headImage") as! String).toResourceSeeURL()))
+            self.nameLabel.text = UserInfo.CurrentUser().userName
+            self.moneyLabel.text = "\(UserInfo.CurrentUser().gold!)"
+            if let str : String = UserInfo.CurrentUser().headImage {
+                headImageView.sd_setImageWithURL(NSURL(string: str.toResourceSeeURL()))
             }
         }
         else
@@ -81,6 +81,7 @@ class MySelfTableViewController: UITableViewController {
             self.loginButton.hidden = false
             self.nameLabel.hidden = true
             self.addressLabel.hidden = true
+            self.moneyLabel.hidden = true
         }
     }
     
@@ -101,6 +102,21 @@ class MySelfTableViewController: UITableViewController {
         let userId = NSUserDefaults.standardUserDefaults().objectForKey("userId")
         if userId != nil{
             self.performSegueWithIdentifier("UserSeeIdentifier", sender: nil)
+        }
+    }
+    
+    func addClick(){
+        if UserInfo.CurrentUser().userId == nil{
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        }
+        else{
+            if let mobile = UserInfo.CurrentUser().mobile{
+                if !mobile.isEmpty{
+                    self.performSegueWithIdentifier("addDeviceIdentifier", sender: nil)
+                    return
+                }
+            }
+            self.tabBarController?.performSegueWithIdentifier("bindPoneIndentifier", sender: nil)
         }
     }
     
@@ -144,6 +160,9 @@ class MySelfTableViewController: UITableViewController {
                 }
             }
             
+        }
+        else if indexPath.section == 1 && indexPath.row == 0{
+            addClick()
         }
     }
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

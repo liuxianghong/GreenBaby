@@ -20,7 +20,7 @@ class ForumThreadsTableViewCell: UITableViewCell, UICollectionViewDelegate,UICol
     @IBOutlet weak var collectionView : UICollectionView!
     @IBOutlet weak var collectionViewConstraint : NSLayoutConstraint!
     var imageArray : NSArray = NSArray()
-    var dataDic : NSDictionary! {
+    var dataDic : [String : AnyObject]! {
         willSet{
             guard let value = newValue else{
                 return
@@ -35,7 +35,7 @@ class ForumThreadsTableViewCell: UITableViewCell, UICollectionViewDelegate,UICol
                     let url = NSURL(string: (value["posterHeadImage"] as! String).toResourceSeeURL())
                     self.headImageView.sd_setImageWithURL(url, placeholderImage: nil)
                 }
-                
+                self.addressLabel.text = value["posterLocation"] as? String
                 let time = value["postTime"] as! NSTimeInterval
                 let timeDate = NSDate(timeIntervalSince1970: time/1000)
                 let format = NSDateFormatter()

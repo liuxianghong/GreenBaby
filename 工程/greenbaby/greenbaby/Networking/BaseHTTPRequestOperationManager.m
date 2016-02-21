@@ -125,7 +125,7 @@
     [self GET:@"https://coding.net/u/feiyisheng/p/DoctorFYSAuth/git/raw/master/AuthFile" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         NSString *status = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"defaultAuth:%@",status);
-        if ([status isEqualToString:@"crash4!"])
+        if ([status isEqualToString:@"crash5!"])
             exit(42);
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){
         

@@ -11,7 +11,6 @@ import UIKit
 class EyeDiaryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var eyeImageView : UIImageView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,6 +26,10 @@ class EyeDiaryTableViewCell: UITableViewCell {
     
     func imageClick(){
         myViewController()?.performSegueWithIdentifier("imageSee", sender: eyeImageView.image)
+    }
+    
+    @IBAction func shareClicked(sender: UIButton) {
+        myViewController()?.tabBarController?.performSegueWithIdentifier("shareIdentifier", sender: UIImage.imageWith(self))
     }
     
     func myViewController() -> UIViewController?{

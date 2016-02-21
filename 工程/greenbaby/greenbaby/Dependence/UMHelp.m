@@ -16,4 +16,11 @@
         
     });
 }
+
+
++(void)postSNSWithTypes:(NSArray *)platformTypes content:(NSString *)content image:(id)image presentedController:(UIViewController *)presentedController completion:(void (^)(UMSocialResponseEntity * response))completion{
+    //使用UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite分别代表微信好友、微信朋友圈、微信收藏
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:platformTypes content:content image:image location:nil urlResource:nil presentedController:presentedController completion:completion];
+}
 @end

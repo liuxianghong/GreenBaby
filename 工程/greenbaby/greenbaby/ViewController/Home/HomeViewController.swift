@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var addDeviceButton : UIButton!
     @IBOutlet weak var backView : UIView!
     @IBOutlet weak var headImageView : UIImageView!
+    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var addressLabel : UILabel!
     @IBOutlet weak var scoreView : HomeScoreView!
     @IBOutlet weak var scoreDistanceView : HomeSmallScoreView!
     @IBOutlet weak var scorePostureView : HomeSmallScoreView!
@@ -22,13 +24,26 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var scoreViewTopConstraint : NSLayoutConstraint!
     @IBOutlet weak var threeScoreViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet weak var threeScoreBackViewHeightConstraint : NSLayoutConstraint!
+    @IBOutlet weak var rankLabel : UILabel!
+    @IBOutlet weak var rankTotalLabel : UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.backView.backgroundColor = UIColor.mainGreenColor()
         
-        addDeviceButton.hidden = true
+        addDeviceButton.hidden = false
+        scoreView.hidden = true
+        threeScoreBackView.hidden = true
+        
+        scoreDistanceView.maxScore = 60
+        scorePostureView.maxScore = 30
+        scoreTimeView.maxScore = 10
+        scoreView.score = 0
+        scoreDistanceView.score = 0
+        scorePostureView.score = 0
+        scoreTimeView.score = 0
         
         headImageView.layer.cornerRadius = 45.0/2;
         headImageView.layer.masksToBounds = true;
@@ -53,7 +68,6 @@ class HomeViewController: UIViewController {
             threeScoreBackViewHeightConstraint.constant = threeScoreBackViewHeightConstraint.constant - threeScoreNeedMoveHeight
         }
         threeScoreViewWidthConstraint.constant = threeScoreViewWidth
-        print(WIFIUtils.fetchSSIDInfo()!)
         
     }
     
@@ -61,10 +75,14 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        scoreView.score = 35
-        scoreDistanceView.score = 35
-        scorePostureView.score = 35
-        scoreTimeView.score = 35
+        if let str = UserInfo.CurrentUser().headImage{
+            let url = NSURL(string: str.toResourceSeeURL())
+            headImageView.sd_setImageWithURL(url, placeholderImage: nil)
+        }
+        nameLabel.text = UserInfo.CurrentUser().userName
+        addressLabel.text = UserInfo.CurrentUser().city
+        self.loadScore()
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -73,10 +91,22 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func shareClicked(sender: UIButton) {
-//        scoreView.score = scoreView.score + 10
-//        scoreDistanceView.score = scoreDistanceView.score + 10
-//        scorePostureView.score = scorePostureView.score + 10
-//        scoreTimeView.score = scoreTimeView.score + 10
+        self.tabBarController?.performSegueWithIdentifier("shareIdentifier", sender: UIImage.imageWith(self.backView))
+    }
+    
+    @IBAction func addClick(sender : AnyObject){
+        if UserInfo.CurrentUser().userId == nil{
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        }
+        else{
+            if let mobile = UserInfo.CurrentUser().mobile{
+                if !mobile.isEmpty{
+                    self.performSegueWithIdentifier("addDeviceIdentifier", sender: nil)
+                    return
+                }
+            }
+            self.tabBarController?.performSegueWithIdentifier("bindPoneIndentifier", sender: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,6 +114,46 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func scoreHide(bo : Bool){
+        addDeviceButton.hidden = !bo
+        scoreView.hidden = bo
+        threeScoreBackView.hidden = bo
+    }
+    
+    func loadScore() {
+        if let userid = UserInfo.CurrentUser().userId{
+            let dic = ["userId" : userid]
+            DeviceRequest.GetHomePageScoreWithParameters(dic, success: { (object) -> Void in
+                print(object)
+                let state = object["state"] as! Int
+                if state == 0{
+                    if let data = object["data"] as? [String : AnyObject]{
+                        self.scoreHide(false)
+                        self.scoreView.score = data["totalScore"] as! Float
+                        self.scoreDistanceView.score = data["distanceScore"] as! Float
+                        self.scorePostureView.score = data["postureScore"] as! Float
+                        self.scoreTimeView.score = data["timeScore"] as! Float
+                        
+                        if let rank = data["rank"] as? Int{
+                            let rankString = NSMutableAttributedString(string: "当前排名")
+                            rankString.appendAttributedString(NSAttributedString(string: "\(rank)", attributes: [NSFontAttributeName : UIFont.systemFontOfSize(14)]))
+                            self.rankLabel.attributedText = rankString
+                            if let count = data["count"] as? Int{
+                                let countString = NSMutableAttributedString(string: "您已经击败")
+                                countString.appendAttributedString(NSAttributedString(string: "\(rank*100/count)%", attributes: [NSFontAttributeName : UIFont.systemFontOfSize(14),NSForegroundColorAttributeName : UIColor.rgbColor(0xfff000)]))
+                                countString.appendAttributedString(NSAttributedString(string: "的人，继续加油哦～"))
+                                self.rankTotalLabel.attributedText = countString
+                            }
+                        }
+                        
+                    }
+                }
+                }) { (error : NSError!) -> Void in
+                    
+            }
+        }
+        
+    }
 
     /*
     // MARK: - Navigation
