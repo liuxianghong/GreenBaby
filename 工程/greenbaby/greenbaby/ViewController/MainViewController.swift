@@ -30,7 +30,7 @@ class MainViewController: UITabBarController {
         for item in self.tabBar.items!{
             item.setTitleTextAttributes( [NSForegroundColorAttributeName : UIColor.mainGreenColor()] , forState: .Selected)
         }
-        //UserInfo.CurrentUser().userId = nil
+        UserInfo.CurrentUser().userId = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +45,7 @@ class MainViewController: UITabBarController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if first{
+            UserInfo.CurrentUser().userId = 32
             self.performSegueWithIdentifier("loginIdentifier", sender: nil)
             first = false
         }

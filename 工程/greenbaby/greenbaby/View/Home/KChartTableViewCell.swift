@@ -11,6 +11,7 @@ import UIKit
 class KChartTableViewCell: UITableViewCell {
 
     @IBOutlet weak var chartView : KChartView!
+    @IBOutlet weak var nameLabel : UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

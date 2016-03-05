@@ -154,6 +154,30 @@ class HomeViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func kChatClick(sender : AnyObject){
+        if UserInfo.CurrentUser().userId == nil{
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            return
+        }
+        self.performSegueWithIdentifier("kChatIdentifier", sender: nil)
+    }
+    
+    @IBAction func eyeDiaryClick(sender : AnyObject){
+        if UserInfo.CurrentUser().userId == nil{
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            return
+        }
+        self.performSegueWithIdentifier("eyeDiaryIdentifier", sender: nil)
+    }
+    
+    @IBAction func CaptureClick(sender : AnyObject){
+        if UserInfo.CurrentUser().userId == nil{
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            return
+        }
+        self.performSegueWithIdentifier("captureIdentifier", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

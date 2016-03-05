@@ -13,12 +13,21 @@ class ImageSeeViewController: UIViewController {
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var downLoadButton : UIButton!
     var image : UIImage!
+    var imageUrl : String!
     var hud : MBProgressHUD!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        imageView.image = image
+        if image != nil{
+            imageView.image = image
+        }
+        else if imageUrl != nil{
+            imageView.sd_setImageWithURL(NSURL(string: imageUrl))
+        }
+        else{
+            imageView.image = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,8 +46,11 @@ class ImageSeeViewController: UIViewController {
     }
     
     @IBAction func downClick(sender : UIButton){
+        if imageView.image == nil{
+            return;
+        }
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+        UIImageWriteToSavedPhotosAlbum(imageView.image!, self, "image:didFinishSavingWithError:contextInfo:", nil)
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject){

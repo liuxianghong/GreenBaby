@@ -10,6 +10,10 @@ import UIKit
 
 class EyeDiaryTableViewController: UITableViewController {
 
+    var first : Bool = true
+    let maxIdex = 10
+    var page = 1
+    var tableViewArray = [[String : AnyObject]]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,8 +22,74 @@ class EyeDiaryTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.estimatedRowHeight = 300.0;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.tableFooterView = UIView();
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+            self.page = 1
+            self.loadData()
+            
+        })
+        
+        self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: { () -> Void in
+            self.page++
+            self.loadData()
+        })
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if first {
+            first = false
+            self.tableView.mj_header.beginRefreshing()
+        }
     }
 
+    func loadData(){
+        let condition = ["userId" : UserInfo.CurrentUser().userId!]
+        let dic = ["condition" : condition , "currentPage" : page,"pageSize" : maxIdex]
+        DeviceRequest.GetEyeDiariesWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            let dic:NSDictionary = object as! NSDictionary
+            let state = dic["state"] as! Int
+            if state == 0{
+                if let array = object["data"] as? [[String : AnyObject]]{
+                    if self.page == 1{
+                        self.tableViewArray = dic["data"] as! Array<Dictionary<String,AnyObject>>
+                    }
+                    else{
+                        self.tableViewArray.appendContentsOf(dic["data"] as! Array<Dictionary<String,AnyObject>>)
+                    }
+                    if array.count < self.maxIdex{
+                        self.tableView.mj_footer.endRefreshingWithNoMoreData()
+                    }
+                    else{
+                        self.tableView.mj_footer.endRefreshing()
+                    }
+                }
+                else{
+                    self.tableView.mj_footer.endRefreshing()
+                }
+            }
+            else{
+                self.tableView.mj_footer.endRefreshing()
+            }
+            self.tableView.reloadData()
+            self.tableView.mj_header.endRefreshing()
+            
+            }) { (error : NSError!) -> Void in
+                print(error)
+                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain
+                hud.hide(true, afterDelay: 1.5)
+                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_footer.endRefreshing()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,17 +104,21 @@ class EyeDiaryTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return tableViewArray.count
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 307
-    }
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 307
+//    }
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 307
+//    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("eyeDiaryIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("eyeDiaryIdentifier", forIndexPath: indexPath) as! EyeDiaryTableViewCell
 
         // Configure the cell...
+        cell.dataDic = tableViewArray[indexPath.row]
 
         return cell
     }
@@ -94,7 +168,13 @@ class EyeDiaryTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "imageSee"{
             let vc = segue.destinationViewController as! ImageSeeViewController
-            vc.image = sender as! UIImage
+            if let image = sender as? UIImage{
+                vc.image = image
+            }
+            else if let imageUrl = sender as? String{
+                vc.imageUrl = imageUrl
+            }
+            
         }
     }
 

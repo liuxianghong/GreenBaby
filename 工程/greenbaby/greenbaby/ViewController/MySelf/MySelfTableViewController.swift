@@ -159,7 +159,6 @@ class MySelfTableViewController: UITableViewController {
                     self.performSegueWithIdentifier("ThreadsIdentifier", sender: indexPath.row)
                 }
             }
-            
         }
         else if indexPath.section == 1 && indexPath.row == 0{
             addClick()

@@ -12,10 +12,45 @@ class CaptureViewController: UIViewController {
 
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var rflushButton : UIButton!
+    @IBOutlet weak var timeLabel : UILabel!
+    var hud : MBProgressHUD!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        reflushClick(rflushButton)
+    }
+    
+    func loadData(){
+        let dic = ["userId" : UserInfo.CurrentUser().userId!]
+        DeviceRequest.RemoteCaptureWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            let state = object["state"] as? Int
+            if state == 0{
+                if let dic = object["data"] as? [String : AnyObject]{
+                    if let imageUrl = dic["imageUrl"] as? String{
+                        self.imageView.sd_setImageWithURL(NSURL(string: imageUrl.toResourceSeeURL()), completed: { (image : UIImage!, error : NSError!, type : SDImageCacheType, url : NSURL!) -> Void in
+                            let time = dic["createTime"] as! NSTimeInterval
+                            let timeDate = NSDate(timeIntervalSince1970: time/1000)
+                            let format = NSDateFormatter()
+                            format.dateFormat = "yyyy-MM-dd | hh:mm"
+                            self.timeLabel.text = format.stringFromDate(timeDate)
+                            self.hud.hide(true)
+                            self.hud = nil
+                        })
+                        return
+                    }
+                }
+            }
+            self.hud.hide(true)
+            self.hud = nil
+            }) { (error : NSError!) -> Void in
+                self.hud.mode = .Text
+                self.hud.detailsLabelText = error.domain
+                self.hud.hide(true, afterDelay: 1.5)
+                self.hud = nil
+                
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,10 +60,13 @@ class CaptureViewController: UIViewController {
     
 
     @IBAction func reflushClick(sender : UIButton){
-        let hud = MBProgressHUD.showHUDAddedTo(imageView, animated: true)
+        if hud != nil{
+            return
+        }
+        hud = MBProgressHUD.showHUDAddedTo(imageView, animated: true)
         hud.dimBackground = true
-        hud.hide(true, afterDelay: 1.5)
         hud.color = UIColor.clearColor()
+        self.loadData()
     }
     
     @IBAction func imageSeeClick(sender : AnyObject){

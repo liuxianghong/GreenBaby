@@ -137,6 +137,7 @@ class LoginViewController: UIViewController {
             }else{
                 hud.mode = .Text
                 hud.detailsLabelText = dic["description"] as! String
+                self.codeButton.setTitle("获取验证码", forState: .Normal)
                 hud.hide(true, afterDelay: 1.5)
             }
             

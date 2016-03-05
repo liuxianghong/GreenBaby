@@ -11,6 +11,10 @@
 
 #define kMethodGetHomePageScore @"/score/getHomePageScore"
 #define kMethodGetRanking @"/score/getRanking"
+#define kMethodGetCandlestickCharts @"/score/getCandlestickCharts"
+#define kMethodGetEyeDiaries @"/eyediary/getEyeDiaries"
+#define kMethodRemoteCapture @"/device/remoteCapture"
+#define kMethodGetDeviceIp @"/device/getDeviceIp"
 
 
 @implementation DeviceRequest
@@ -23,4 +27,21 @@
 {
     [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetRanking WithParameters:parameters post:YES success:success failure:failure];
 }
+
++ (void)GetCandlestickChartsWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetCandlestickCharts WithParameters:parameters post:YES success:success failure:failure];
+}
+
++ (void)GetEyeDiariesWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetEyeDiaries WithParameters:parameters post:YES success:success failure:failure];
+}
+
++ (void)RemoteCaptureWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodRemoteCapture WithParameters:parameters post:YES success:success failure:failure];
+}
+
++ (void)GetDeviceIpWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetDeviceIp WithParameters:parameters post:YES success:success failure:failure];
+}
+
 @end

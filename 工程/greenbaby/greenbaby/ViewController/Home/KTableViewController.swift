@@ -14,9 +14,10 @@ class KTableViewController: UITableViewController {
     @IBOutlet weak var typeTimeButton : UIButton!
     @IBOutlet weak var timeDayButton : UIButton!
     weak var typeButton : UIButton!
-    var type = 1
+    var dataType = 1
     weak var timeButton : UIButton!
-    var time = 1
+    var timeType = 1
+    var dataDic = [Int : KChartViewModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,10 +36,37 @@ class KTableViewController: UITableViewController {
         var frame = self.tableView.tableHeaderView?.frame
         frame?.size.height = height
         self.tableView.tableHeaderView?.frame = frame!
-        self.tableView.tableFooterView  = UIView()
+        frame?.size.height = 176
+        self.tableView.tableFooterView?.frame = frame!
         
         typeClick(typeTimeButton)
         timeClick(timeDayButton)
+        
+        /*"userId": 用户ID,
+        "dataType": 数据类型, 1:用眼距离 2:用眼时间 3:姿势
+        "timeType": 时间类型 1:日 2:周 3:月 4:年
+        */
+        loadData(1, ttype: 1)
+        
+    }
+    
+    
+    func loadData(dtype : Int , ttype : Int){
+        if self.dataDic[dtype * 10 + ttype] != nil{
+            return
+        }
+        let dic = ["userId" : UserInfo.CurrentUser().userId! , "dataType" : dataType,"timeType" : timeType]
+        DeviceRequest.GetCandlestickChartsWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            let state = object["state"] as? Int
+            if state == 0{
+                if let array = object["data"] as? [[String : AnyObject]]{
+                    self.dataDic[dtype * 10 + ttype] = KChartViewModel(type: dtype, time: ttype, dic: array)
+                }
+            }
+            self.tableView.reloadData()
+            }) { (error : NSError!) -> Void in
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +80,9 @@ class KTableViewController: UITableViewController {
         }
         typeButton = sender
         typeButton.selected = true
-        type = typeButton.tag
+        dataType = typeButton.tag
+        loadData(dataType ,ttype: timeType)
+        self.tableView.reloadData()
     }
     
     @IBAction func timeClick(sender : UIButton){
@@ -61,23 +91,33 @@ class KTableViewController: UITableViewController {
         }
         timeButton = sender
         timeButton.selected = true
-        time = timeButton.tag
+        timeType = timeButton.tag
+        loadData(dataType ,ttype: timeType)
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        if section == 1{
+            return 1
+        }
+        if dataType == 3{
+            return 3
+        }
+        else{
+            return 1
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 2{
+        if indexPath.section == 1{
             return 25
         }
         return 170
@@ -86,7 +126,7 @@ class KTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 2{
+        if indexPath.section == 1{
             let cell = tableView.dequeueReusableCellWithIdentifier("KBottomIndentifier", forIndexPath: indexPath)
             return cell
         }
@@ -94,6 +134,32 @@ class KTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("KChartIndentifier", forIndexPath: indexPath) as! KChartTableViewCell
 
         // Configure the cell...
+        if let model = self.dataDic[self.dataType * 10 + self.timeType]{
+            cell.chartView.viewModel = KChartViewModel(type: model.chartType, time: model.timeType, dic: model.dataDicArray)
+            cell.chartView.viewModel.subType = indexPath.row + 1
+            print(indexPath.row + 1)
+            cell.chartView.setNeedsDisplay()
+        }
+        else{
+            cell.chartView.viewModel = KChartViewModel(type: dataType, time: timeType, dic: nil)
+            cell.chartView.viewModel.subType = indexPath.row + 1
+            print(indexPath.row + 1)
+            cell.chartView.setNeedsDisplay()
+        }
+        
+        var valueKey = "   "
+        if dataType == 3{
+            if indexPath.row == 0{
+                valueKey = "俯仰（0 ~ 90）"
+            }
+            else if indexPath.row == 1{
+                valueKey = "摇摆（0 ~ 90）"
+            }
+            else if indexPath.row == 2{
+                valueKey = "倾斜（0 ~ 90）"
+            }
+        }
+        cell.nameLabel.text = valueKey
 
         return cell
     }

@@ -10,6 +10,7 @@ import UIKit
 
 class TrainingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
+    @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var buttonView : UIView!
     
     @IBOutlet weak var sliderBackView : UIView!
@@ -19,6 +20,9 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBOutlet weak var scoreLabel : UILabel!
     @IBOutlet weak var tableView : UITableView!
+    var ip = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +37,28 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
         
         self.tableView.tableFooterView = UIView()
     }
+    
+    func loadDeviceIP(){
+        let dic = ["userId" : UserInfo.CurrentUser().userId!]
+        DeviceRequest.GetDeviceIpWithParameters(dic, success: { (object) -> Void in
+            print(object)
+            let state = object["state"] as? Int
+            if state == 0{
+                if let dicData = object["data"] as? [String : AnyObject]{
+                    if let ip = dicData["ip"] as? String{
+                        self.ip = ip
+                    }
+                }
+            }
+            }) { (error : NSError!) -> Void in
+                
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        loadDeviceIP()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,6 +67,12 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBAction func beginClick(sender : UIButton){
         beginButton.selected = !beginButton.selected
+        if !self.ip.isEmpty{
+            let url = "http://\(self.ip):8081"
+            imageView.sd_setImageWithURL(NSURL(string: url), completed: { (image : UIImage!, error : NSError!, type : SDImageCacheType, url : NSURL!) -> Void in
+                
+            })
+        }
     }
 
     @IBAction func stopClick(sender : UIButton){
