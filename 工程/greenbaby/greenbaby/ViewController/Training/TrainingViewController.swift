@@ -8,9 +8,40 @@
 
 import UIKit
 
-struct TrainingViewModel {
+class TrainingViewModel : NSObject{
     var training : Training!
     var image : UIImage!
+    func distanceScore() -> Float {
+        if training == nil {
+            return 0
+        }
+        return Float(training.distance!) / 40 * 60
+    }
+    
+    func pitchScore() -> Float {
+        if training == nil {
+            return 0
+        }
+        return (90 - Float(training.pitch!)) / 90 * 10
+    }
+    
+    func rollScore() -> Float {
+        if training == nil {
+            return 0
+        }
+        return (90 - Float(training.roll!)) / 90 * 10
+    }
+    
+    func yawScore() -> Float {
+        if training == nil {
+            return 0
+        }
+        return (90 - Float(training.yaw!)) / 90 * 10
+    }
+    
+    func totalScore() -> Float {
+        return distanceScore() + rollScore() + yawScore() + pitchScore()
+    }
 }
 
 class TrainingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate ,NSURLConnectionDataDelegate{
@@ -138,6 +169,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             if viewModel.training != nil {
                 viewModel.image = UIImage(data: viewModel.training.image!)
                 self.tableView.reloadData()
+                self.scoreLabel.text = String(format: "%.1f", viewModel.totalScore())
             }
             else{
                 return
@@ -266,6 +298,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
                     NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                 }
                 self.tableView.reloadData()
+                self.scoreLabel.text = String(format: "%.1f", viewModel.totalScore())
             }
             let scendData = receivedData.subdataWithRange(NSMakeRange(endLocation, receivedData.length - endLocation))
             receivedData = NSMutableData(data: scendData)
