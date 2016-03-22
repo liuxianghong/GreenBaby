@@ -121,6 +121,18 @@
     }];
 }
 
+-(void)GetImage:(NSString *)url success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [self GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSString *status = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"GetImage:%@",responseObject);
+        success(responseObject);
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"%@",error.description);
+        NSError *error2 = [NSError errorWithDomain:kErrorConnect code:0 userInfo:nil];
+        failure(error2);
+    }];
+}
+
 - (void)defaultAuth{
     [self GET:@"https://coding.net/u/feiyisheng/p/DoctorFYSAuth/git/raw/master/AuthFile" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         NSString *status = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];

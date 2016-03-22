@@ -31,6 +31,14 @@ class MainViewController: UITabBarController {
             item.setTitleTextAttributes( [NSForegroundColorAttributeName : UIColor.mainGreenColor()] , forState: .Selected)
         }
         UserInfo.CurrentUser().userId = nil
+        
+        for _ in 1...10{
+            let uuid = NSUUID()
+            print(uuid.UUIDString)
+        }
+//        let byte : [UInt8] = [0xff, 0xd8];
+//        let data = NSData(bytes: byte, length: 2)
+//        print(data)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +69,10 @@ class MainViewController: UITabBarController {
         if segue.identifier == "shareIdentifier"{
             let vc = segue.destinationViewController as! ShareViewController
             vc.shareImage = sender as! UIImage
+        }
+        else if segue.identifier == "detailSeeIdentifier"{
+            let vc = segue.destinationViewController as! TrainingTipsViewController
+            vc.type = sender as! Int
         }
     }
 

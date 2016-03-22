@@ -6,11 +6,10 @@ target 'greenbaby' do
 pod 'AFNetworking'
 pod 'SDWebImage'
 pod 'MBProgressHUD'
-pod 'IHKeyboardAvoiding'
 pod 'DZNEmptyDataSet'
 pod 'JSONKit-NoWarning'
 pod 'MJRefresh'
-pod 'RBStoryboardLink'
-pod 'ReactiveCocoa', '~> 2.5'
+pod 'CocoaAsyncSocket'
+pod 'MagicalRecord'
 end
 

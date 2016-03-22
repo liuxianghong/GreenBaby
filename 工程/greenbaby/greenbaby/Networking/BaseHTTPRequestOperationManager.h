@@ -13,4 +13,6 @@
 - (void)defaultHTTPWithMethod:(NSString *)method WithParameters:(id)parameters  post:(BOOL)bo success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 - (void)filePostWithUrl:(NSString *)urlString WithParameters:(NSData *)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
+-(void)GetImage:(NSString *)url success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 @end

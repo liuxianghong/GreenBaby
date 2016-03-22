@@ -44,4 +44,17 @@
     [[BaseHTTPRequestOperationManager sharedManager]defaultHTTPWithMethod:kMethodGetDeviceIp WithParameters:parameters post:YES success:success failure:failure];
 }
 
++(void)GetImage:(NSString *)url success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [[BaseHTTPRequestOperationManager sharedManager] GetImage:url success:success failure:failure];
+}
+
++(NSData *)beginData{
+    char dd[2] = {0xFF, 0xD8};
+    return [NSData dataWithBytes:dd length:2];
+}
+
++(NSData *)endData{
+    char dd[2] = {0xFF, 0xD9};
+    return [NSData dataWithBytes:dd length:2];
+}
 @end

@@ -17,3 +17,4 @@
 #import "NSString+scisky.h"
 #import "UIBezierPath+quadCurvedPath.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import <MagicalRecord/MagicalRecord.h>

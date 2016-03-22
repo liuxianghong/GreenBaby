@@ -20,4 +20,10 @@
 + (void)RemoteCaptureWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 + (void)GetDeviceIpWithParameters: (id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
++(void)GetImage:(NSString *)url success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
+
++(NSData *)beginData;
+
++(NSData *)endData;
 @end

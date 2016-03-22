@@ -20,6 +20,43 @@ class TrainingTableViewCell: UITableViewCell {
     @IBOutlet weak var scoreLable : UILabel!
     
     @IBOutlet weak var sliderConstraint : NSLayoutConstraint!
+    @IBOutlet weak var detailSeeButton : UIButton!
+    
+    @IBOutlet weak var sliderValueView : UIView!
+    
+    var type = 0
+    var layoutValue : CGFloat = 0
+    var model = TrainingViewModel(){
+        willSet{
+            if type == 0{
+                self.sliderValueLabel.text = String(newValue.Distance)
+                self.sliderLeftLabel.text = "0cm"
+                self.sliderRightLabel.text = "35cm"
+                layoutValue = CGFloat((newValue.Distance)/35.0)
+            }
+            else if type == 1{
+                self.sliderValueLabel.text = String(newValue.pitch)
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+                layoutValue = CGFloat((newValue.pitch)/90.0)
+            }
+            else if type == 2{
+                self.sliderValueLabel.text = String(newValue.yaw)
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+                layoutValue = CGFloat((newValue.yaw)/90.0)
+            }
+            else if type == 3{
+                self.sliderValueLabel.text = String(newValue.roll)
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+                layoutValue = CGFloat((newValue.roll)/90.0)
+            }
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,6 +66,27 @@ class TrainingTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.sliderConstraint.constant = self.sliderBackView.frame.width - 1 - self.sliderBackView.frame.width * layoutValue
+        print(self.sliderConstraint.constant,self.sliderBackView.frame.width)
+    }
+    
+    @IBAction func detailClick(){
+        myViewController()?.tabBarController!.performSegueWithIdentifier("detailSeeIdentifier", sender: type)
+    }
+    
+    func myViewController() -> UIViewController?{
+        var responder = (self as UIResponder).nextResponder()
+        while responder != nil{
+            if responder!.isKindOfClass(UIViewController.classForCoder()){
+                return responder as? UIViewController
+            }
+            responder = responder!.nextResponder()!
+        }
+        return nil
     }
 
 }

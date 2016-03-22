@@ -71,9 +71,17 @@ class MySelfTableViewController: UITableViewController {
             self.moneyLabel.hidden = false
             
             self.nameLabel.text = UserInfo.CurrentUser().userName
-            self.moneyLabel.text = "\(UserInfo.CurrentUser().gold!)"
+            if let gold = UserInfo.CurrentUser().gold{
+                self.moneyLabel.text = "\(gold)"
+            }
+            else{
+                self.moneyLabel.text = ""
+            }
             if let str : String = UserInfo.CurrentUser().headImage {
                 headImageView.sd_setImageWithURL(NSURL(string: str.toResourceSeeURL()))
+            }
+            else{
+                headImageView.image = nil
             }
         }
         else

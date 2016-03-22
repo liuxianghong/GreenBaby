@@ -8,7 +8,16 @@
 
 import UIKit
 
-class TrainingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+struct TrainingViewModel {
+    var Distance = 0.0
+    var pitch = 0.0
+    var roll = 0.0
+    var yaw = 0.0
+    var time : NSDate!
+    var image : UIImage!
+}
+
+class TrainingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate ,NSURLConnectionDataDelegate{
 
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var buttonView : UIView!
@@ -21,7 +30,11 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     @IBOutlet weak var scoreLabel : UILabel!
     @IBOutlet weak var tableView : UITableView!
     var ip = ""
-    
+    var connection : NSURLConnection!
+    var receivedData : NSMutableData!
+    var viewModel = TrainingViewModel()
+    let cellData = ["用眼距离","俯仰","摇摆","倾斜"]
+    let cellImage = ["icon_juli","icon_fuyang","icon_yaobai","icon_qinxie"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,16 +80,18 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBAction func beginClick(sender : UIButton){
         beginButton.selected = !beginButton.selected
-        if !self.ip.isEmpty{
-            let url = "http://\(self.ip):8081"
-            imageView.sd_setImageWithURL(NSURL(string: url), completed: { (image : UIImage!, error : NSError!, type : SDImageCacheType, url : NSURL!) -> Void in
-                
-            })
+        self.ip = "192.168.1.138"
+        if connection != nil{
+            connection.start()
+        }
+        else{
+            netWorkVideo()
         }
     }
 
     @IBAction func stopClick(sender : UIButton){
         beginButton.selected = false
+        connection.cancel()
     }
     
     @IBAction func seebackClick(sender : UIButton){
@@ -107,16 +122,109 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("TrainingCell", forIndexPath: indexPath) as! TrainingTableViewCell
         
         // Configure the cell...
+        cell.NameLabel.text = cellData[indexPath.row]
+        cell.type = indexPath.row
+        cell.model = viewModel
+        cell.detailSeeButton.setBackgroundImage(UIImage(named: cellImage[indexPath.row]), forState: .Normal)
         return cell
     }
-    /*
+    
+    func netWorkVideo(){
+        self.ip = "192.168.1.138"
+        if !self.ip.isEmpty{
+            let urls = "http://192.168.1.138:8081"
+            let url = NSURL(string: urls)
+            let request = NSURLRequest(URL: url!)
+            connection = NSURLConnection(request: request, delegate: self)
+            connection!.start()
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        print(error)
+    }
+    
+    
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        if let httpRespone = response as? NSHTTPURLResponse{
+            //print(httpRespone.allHeaderFields)
+            if let Distance = httpRespone.allHeaderFields["Distance"] as? String,let pitch = httpRespone.allHeaderFields["pitch"] as? String,let roll = httpRespone.allHeaderFields["roll"] as? String,let yaw = httpRespone.allHeaderFields["yaw"] as? String,let time = httpRespone.allHeaderFields["X-Timestamp"] as? String{
+                viewModel.Distance = Double(Distance)!
+                viewModel.pitch = Double(pitch)!
+                viewModel.roll = Double(roll)!
+                viewModel.yaw = Double(yaw)!
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+                viewModel.time = dateFormatter.dateFromString(time)
+            }
+            
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        //print(data)
+        if receivedData == nil{
+            receivedData = NSMutableData()
+        }
+        receivedData.appendData(data)
+        let beginRange = receivedData.rangeOfData(DeviceRequest.beginData(), options: .Backwards, range: NSMakeRange(0, receivedData.length))
+        let beginLocation = beginRange.location
+        let endRange = receivedData.rangeOfData(DeviceRequest.endData(), options: .Backwards, range: NSMakeRange(0, receivedData.length))
+        let endLocation = endRange.location + endRange.length
+        if receivedData.length >= endLocation && beginLocation >= 0{
+            let imageRange = NSMakeRange(beginLocation, endLocation - beginLocation)
+            let imageData = receivedData.subdataWithRange(imageRange)
+            let receivedImage = UIImage(data: imageData)
+            if receivedImage != nil{
+                self.imageView.image = receivedImage
+                print(viewModel)
+                viewModel.image = receivedImage
+                if let user = UserInfo.CurrentGBUser(){
+                    user.addTraining(viewModel);
+                }
+                self.tableView.reloadData()
+            }
+            let scendData = receivedData.subdataWithRange(NSMakeRange(endLocation, receivedData.length - endLocation))
+            receivedData = NSMutableData(data: scendData)
+        }
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        print("connectionDidFinishLoading")
+    }
+    
+////每接收一段数据就会调用此函数
+//-(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data
+//{
+//    // NSLog(@”==didReceiveData:data==%@==”,data);
+//    [self.allData appendData:data];
+//    // NSLog(@”==didReceiveData==self.allData==%@==”,self.allData);
+//    // http://zasper.net/archives/4891
+//    NSLog(@”connectDidReceiveData-endMarkerData-%@”,endMarkerData);
+//    NSRange endRange=[self.allData rangeOfData:endMarkerData
+//    options:0
+//    range:NSMakeRange(0, self.allData.length)];
+//    long endLocation=endRange.location + endRange.length;
+//    if(self.allData.length >= endLocation){
+//        NSRange imageRange=NSMakeRange(0, endLocation);
+//        NSData* imageData=[self.allData subdataWithRange:imageRange];
+//        UIImage* receivedImage=[UIImage imageWithData:imageData];
+//        if(receivedImage){
+//            self.imageView.image = receivedImage;
+//            NSLog(@”解码图片”);
+//        }
+//    }
+//}
+
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
     }
-    */
+
 
 }

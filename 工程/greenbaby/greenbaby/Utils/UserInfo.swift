@@ -147,6 +147,13 @@ class UserInfo: NSObject {
         return cuser
     }
     
+    static func CurrentGBUser() -> User!{
+        if CurrentUser().userId == nil{
+            return nil
+        }
+        return User.userByUid(CurrentUser().userId!)
+    }
+    
     static func setUser(dic : AnyObject){
         let user = UserInfo.CurrentUser()
         user!.userId = dic["userId"] as? Int

@@ -256,6 +256,11 @@
 		D36978C41C1E6E940094921B /* ForumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36978C31C1E6E940094921B /* ForumCollectionViewCell.swift */; };
 		D36978C91C1E87E50094921B /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978C81C1E87E50094921B /* LoginRequest.m */; };
 		D36978CC1C1FAA740094921B /* BannersRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978CB1C1FAA740094921B /* BannersRequest.m */; };
+		D37978F21C9EF2B700AF8E93 /* greenbaby.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D37978F01C9EF2B700AF8E93 /* greenbaby.xcdatamodeld */; };
+		D37978F71C9EF4AF00AF8E93 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37978F31C9EF4AF00AF8E93 /* User+CoreDataProperties.swift */; };
+		D37978F81C9EF4AF00AF8E93 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37978F41C9EF4AF00AF8E93 /* User.swift */; };
+		D37978F91C9EF4AF00AF8E93 /* Training+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37978F51C9EF4AF00AF8E93 /* Training+CoreDataProperties.swift */; };
+		D37978FA1C9EF4AF00AF8E93 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37978F61C9EF4AF00AF8E93 /* Training.swift */; };
 		D38B7FC71C3F76F9003B150C /* KChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */; };
 		D38B7FC91C3F7740003B150C /* KChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC81C3F7740003B150C /* KChartView.swift */; };
 		D38B7FD01C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */; };
@@ -285,6 +290,7 @@
 		D3BDDEDD1C043EAD00F06536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */; };
 		D3BDDEE01C043EAD00F06536 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */; };
 		D3BDDEF21C04404E00F06536 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D3BDDEEA1C04404E00F06536 /* README.md */; };
+		D3EB832F1C9B035300691415 /* TrainingTipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB832E1C9B035300691415 /* TrainingTipsViewController.swift */; };
 		D3ED053A1C22F05A00DF76E2 /* ForumThreadsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED05391C22F05A00DF76E2 /* ForumThreadsDetailViewController.swift */; };
 		D3ED053E1C22FA1C00DF76E2 /* kuang_pinglun.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED053B1C22FA1C00DF76E2 /* kuang_pinglun.png */; };
 		D3ED053F1C22FA1C00DF76E2 /* kuang_pinglun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ED053C1C22FA1C00DF76E2 /* kuang_pinglun@2x.png */; };
@@ -591,6 +597,11 @@
 		D36978C81C1E87E50094921B /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 		D36978CA1C1FAA740094921B /* BannersRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannersRequest.h; sourceTree = "<group>"; };
 		D36978CB1C1FAA740094921B /* BannersRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannersRequest.m; sourceTree = "<group>"; };
+		D37978F11C9EF2B700AF8E93 /* greenbaby.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = greenbaby.xcdatamodel; sourceTree = "<group>"; };
+		D37978F31C9EF4AF00AF8E93 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D37978F41C9EF4AF00AF8E93 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D37978F51C9EF4AF00AF8E93 /* Training+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Training+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D37978F61C9EF4AF00AF8E93 /* Training.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KChartTableViewCell.swift; sourceTree = "<group>"; };
 		D38B7FC81C3F7740003B150C /* KChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KChartView.swift; sourceTree = "<group>"; };
 		D38B7FCE1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+quadCurvedPath.h"; sourceTree = "<group>"; };
@@ -624,6 +635,7 @@
 		D3BDDEDF1C043EAD00F06536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3BDDEE11C043EAD00F06536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3BDDEEA1C04404E00F06536 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3EB832E1C9B035300691415 /* TrainingTipsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrainingTipsViewController.swift; path = ../../View/TrainingTipsViewController.swift; sourceTree = "<group>"; };
 		D3ED05391C22F05A00DF76E2 /* ForumThreadsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForumThreadsDetailViewController.swift; sourceTree = "<group>"; };
 		D3ED053B1C22FA1C00DF76E2 /* kuang_pinglun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuang_pinglun.png; sourceTree = "<group>"; };
 		D3ED053C1C22FA1C00DF76E2 /* kuang_pinglun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kuang_pinglun@2x.png"; sourceTree = "<group>"; };
@@ -855,9 +867,22 @@
 			path = Forum;
 			sourceTree = "<group>";
 		};
+		D37978EF1C9EF29900AF8E93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D37978F31C9EF4AF00AF8E93 /* User+CoreDataProperties.swift */,
+				D37978F41C9EF4AF00AF8E93 /* User.swift */,
+				D37978F51C9EF4AF00AF8E93 /* Training+CoreDataProperties.swift */,
+				D37978F61C9EF4AF00AF8E93 /* Training.swift */,
+				D37978F01C9EF2B700AF8E93 /* greenbaby.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D3B3181B1C1BF73200ADE350 /* Training */ = {
 			isa = PBXGroup;
 			children = (
+				D3EB832E1C9B035300691415 /* TrainingTipsViewController.swift */,
 				D3B3181C1C1BF74A00ADE350 /* TrainingViewController.swift */,
 			);
 			path = Training;
@@ -889,6 +914,7 @@
 				D3BDDED91C043EAD00F06536 /* Main.storyboard */,
 				D3BDDEDC1C043EAD00F06536 /* Assets.xcassets */,
 				D3BDDEDE1C043EAD00F06536 /* LaunchScreen.storyboard */,
+				D37978EF1C9EF29900AF8E93 /* Model */,
 				D340FB621C1026CD00011B5B /* Dependence */,
 				D3BDDEE71C04404E00F06536 /* Networking */,
 				D3BDDEEB1C04404E00F06536 /* Utils */,
@@ -1600,10 +1626,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D37978FA1C9EF4AF00AF8E93 /* Training.swift in Sources */,
 				D34671561C23F80100ECAEEA /* UserSeeTableViewController.swift in Sources */,
 				D340FB5E1C10225500011B5B /* CustomButton.swift in Sources */,
 				D3ED05421C23131300DF76E2 /* ForumThreadsDetailHeadTableViewCell.swift in Sources */,
 				D32F2E761C16DB0600A0BEF4 /* MySelfTableViewController.swift in Sources */,
+				D3EB832F1C9B035300691415 /* TrainingTipsViewController.swift in Sources */,
+				D37978F91C9EF4AF00AF8E93 /* Training+CoreDataProperties.swift in Sources */,
 				D32F2E711C16C0CF00A0BEF4 /* LeaderboardTableViewCell.swift in Sources */,
 				D351379F1C3BC9070023DA8D /* VSInspectionResultViewController.swift in Sources */,
 				D32F2E731C16C0EC00A0BEF4 /* LeaderboardTableViewController.swift in Sources */,
@@ -1642,6 +1671,7 @@
 				D3FF82331C0F366F00B92022 /* SwiftyJSON.swift in Sources */,
 				D3FAF7091C22B4C100CB5925 /* ForumThreadsTableViewController.swift in Sources */,
 				D3FAF6FA1C22856900CB5925 /* MoreForumViewController.swift in Sources */,
+				D37978F21C9EF2B700AF8E93 /* greenbaby.xcdatamodeld in Sources */,
 				D3FAF7031C229E0C00CB5925 /* BannersViewController.swift in Sources */,
 				D340FB641C1026CD00011B5B /* README.md in Sources */,
 				D34671461C23BD1000ECAEEA /* FileRequest.m in Sources */,
@@ -1651,11 +1681,13 @@
 				D342D3261C7976780046A128 /* DeviceRequest.m in Sources */,
 				D32F2E5C1C16B57400A0BEF4 /* HomeViewController.swift in Sources */,
 				D340FB6A1C1063EE00011B5B /* CompleteTableViewCell.swift in Sources */,
+				D37978F81C9EF4AF00AF8E93 /* User.swift in Sources */,
 				D316A9471C31076E00B158B8 /* KTableViewController.swift in Sources */,
 				D35A50691C3A4472007BC2FE /* VSInspectionViewController.swift in Sources */,
 				D3364BC51C1ABFD50055C75C /* QRCodeGenerate.swift in Sources */,
 				D3ED05441C23135400DF76E2 /* ForumThreadsDetailCommentHeadTableViewCell.swift in Sources */,
 				D34671541C23EEF900ECAEEA /* ThreadsTableViewController.swift in Sources */,
+				D37978F71C9EF4AF00AF8E93 /* User+CoreDataProperties.swift in Sources */,
 				D3BDDED21C043EAD00F06536 /* main.m in Sources */,
 				D3FF82391C0F371100B92022 /* UIColor+greenbaby.m in Sources */,
 				D3364BB51C1AA5A40055C75C /* UMHelp.m in Sources */,
@@ -1856,6 +1888,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D37978F01C9EF2B700AF8E93 /* greenbaby.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D37978F11C9EF2B700AF8E93 /* greenbaby.xcdatamodel */,
+			);
+			currentVersion = D37978F11C9EF2B700AF8E93 /* greenbaby.xcdatamodel */;
+			path = greenbaby.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D3BDDEC51C043EAD00F06536 /* Project object */;
 }

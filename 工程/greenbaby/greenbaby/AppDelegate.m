@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
+#import <MagicalRecord/MagicalRecord.h>
 
 @interface AppDelegate ()
 
@@ -23,6 +24,9 @@
     [UMSocialData setAppKey:@"566afeaf67e58ede81003e22"];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:@"wxd2968aaab147c80c" appSecret:@"4cdf77d7c60f7da968aa812147f9e5a4" url:@"http://www.tm0755.com"];
+    
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"meizhikang.sqlite"];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     
     return YES;
 }
@@ -47,6 +51,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
