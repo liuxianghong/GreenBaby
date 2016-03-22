@@ -24,33 +24,51 @@ class TrainingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sliderValueView : UIView!
     
-    var type = 0
+    var type = 0{
+        willSet{
+            if newValue == 0{
+                self.sliderLeftLabel.text = "0cm"
+                self.sliderRightLabel.text = "35cm"
+            }
+            else if newValue == 1{
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+            }
+            else if newValue == 2{
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+            }
+            else if newValue == 3{
+                self.sliderLeftLabel.text = "0°"
+                self.sliderRightLabel.text = "90°"
+            }
+        }
+    }
     var layoutValue : CGFloat = 0
     var model = TrainingViewModel(){
         willSet{
-            if type == 0{
-                self.sliderValueLabel.text = String(newValue.Distance)
-                self.sliderLeftLabel.text = "0cm"
-                self.sliderRightLabel.text = "35cm"
-                layoutValue = CGFloat((newValue.Distance)/35.0)
+            if newValue.training == nil{
+                self.sliderValueLabel.text = String(0)
+                layoutValue = 0
+                return;
             }
-            else if type == 1{
-                self.sliderValueLabel.text = String(newValue.pitch)
-                self.sliderLeftLabel.text = "0°"
-                self.sliderRightLabel.text = "90°"
-                layoutValue = CGFloat((newValue.pitch)/90.0)
-            }
-            else if type == 2{
-                self.sliderValueLabel.text = String(newValue.yaw)
-                self.sliderLeftLabel.text = "0°"
-                self.sliderRightLabel.text = "90°"
-                layoutValue = CGFloat((newValue.yaw)/90.0)
-            }
-            else if type == 3{
-                self.sliderValueLabel.text = String(newValue.roll)
-                self.sliderLeftLabel.text = "0°"
-                self.sliderRightLabel.text = "90°"
-                layoutValue = CGFloat((newValue.roll)/90.0)
+            else{
+                if type == 0{
+                    self.sliderValueLabel.text = String(newValue.training.distance)
+                    layoutValue = CGFloat(Float(newValue.training.distance!)/35.0)
+                }
+                else if type == 1{
+                    self.sliderValueLabel.text = String(newValue.training.pitch)
+                    layoutValue = CGFloat(Float(newValue.training.pitch!)/90.0)
+                }
+                else if type == 2{
+                    self.sliderValueLabel.text = String(newValue.training.yaw)
+                    layoutValue = CGFloat(Float(newValue.training.yaw!)/90.0)
+                }
+                else if type == 3{
+                    self.sliderValueLabel.text = String(newValue.training.roll)
+                    layoutValue = CGFloat(Float(newValue.training.roll!)/90.0)
+                }
             }
             self.setNeedsLayout()
             self.layoutIfNeeded()

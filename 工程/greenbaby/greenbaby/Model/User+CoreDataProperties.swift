@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  greenbaby
 //
-//  Created by 刘向宏 on 16/3/20.
+//  Created by 刘向宏 on 16/3/22.
 //  Copyright © 2016年 刘向宏. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,6 +15,8 @@ import CoreData
 extension User {
 
     @NSManaged var uid: NSNumber?
-    @NSManaged var trainings: NSSet?
+    @NSManaged var ip: String?
+    @NSManaged var training: Training?
+    @NSManaged var lastTraining: Training?
 
 }

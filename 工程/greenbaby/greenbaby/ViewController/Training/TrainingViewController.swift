@@ -9,11 +9,7 @@
 import UIKit
 
 struct TrainingViewModel {
-    var Distance = 0.0
-    var pitch = 0.0
-    var roll = 0.0
-    var yaw = 0.0
-    var time : NSDate!
+    var training : Training!
     var image : UIImage!
 }
 
@@ -29,12 +25,15 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     @IBOutlet weak var scoreLabel : UILabel!
     @IBOutlet weak var tableView : UITableView!
-    var ip = ""
     var connection : NSURLConnection!
     var receivedData : NSMutableData!
     var viewModel = TrainingViewModel()
     let cellData = ["用眼距离","俯仰","摇摆","倾斜"]
     let cellImage = ["icon_juli","icon_fuyang","icon_yaobai","icon_qinxie"]
+    
+    var isTraining = false
+    var isReplay = false
+    var hud : MBProgressHUD!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +58,8 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             if state == 0{
                 if let dicData = object["data"] as? [String : AnyObject]{
                     if let ip = dicData["ip"] as? String{
-                        self.ip = ip
+                        UserInfo.CurrentGBUser().ip = ip
+                        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                     }
                 }
             }
@@ -70,7 +70,9 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        loadDeviceIP()
+        if UserInfo.CurrentGBUser() != nil {
+            loadDeviceIP()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,23 +81,73 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     @IBAction func beginClick(sender : UIButton){
-        beginButton.selected = !beginButton.selected
-        self.ip = "192.168.1.138"
+        if UserInfo.CurrentGBUser() == nil {
+            self.tabBarController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            return
+        }
+        
+        //self.ip = "192.168.1.138"
         if connection != nil{
-            connection.start()
+            connection.cancel()
+            connection = nil
+        }
+        
+        if !UserInfo.CurrentGBUser().ip!.isEmpty{
+            print(UserInfo.CurrentGBUser().ip)
         }
         else{
-            netWorkVideo()
+            return
         }
+        beginButton.selected = true
+        isTraining = true
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        netWorkVideo()
     }
 
-    @IBAction func stopClick(sender : UIButton){
+    @IBAction func stopClick(sender : UIButton?){
         beginButton.selected = false
-        connection.cancel()
+        isTraining = false
+        if connection != nil {
+            connection.cancel()
+            connection = nil
+        }
+        isReplay = false
     }
     
-    @IBAction func seebackClick(sender : UIButton){
-        beginButton.selected = false
+    @IBAction func seebackClick(sender : UIButton?){
+        if UserInfo.CurrentGBUser() == nil {
+            return
+        }
+        if UserInfo.CurrentGBUser().training == nil {
+            return
+        }
+        stopClick(nil)
+        viewModel.training = nil
+        isReplay = true
+        replay()
+    }
+    
+    func replay() {
+        if isReplay {
+            if viewModel.training == nil {
+                viewModel.training = UserInfo.CurrentGBUser().training
+            }
+            else{
+                viewModel.training = viewModel.training.next
+            }
+            if viewModel.training != nil {
+                viewModel.image = UIImage(data: viewModel.training.image!)
+                self.tableView.reloadData()
+            }
+            else{
+                return
+            }
+            
+            if viewModel.training.timedisplay == nil {
+                return
+            }
+            self.performSelector(#selector(TrainingViewController.replay), withObject: nil, afterDelay: NSTimeInterval(viewModel.training.timedisplay!))
+        }
     }
     
     
@@ -130,34 +182,52 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func netWorkVideo(){
-        self.ip = "192.168.1.138"
-        if !self.ip.isEmpty{
-            let urls = "http://192.168.1.138:8081"
-            let url = NSURL(string: urls)
-            let request = NSURLRequest(URL: url!)
-            connection = NSURLConnection(request: request, delegate: self)
-            connection!.start()
+        UserInfo.CurrentGBUser().ip = "192.168.1.138"
+        let urls = "http://192.168.1.138:8081"
+        let url = NSURL(string: urls)
+        let request = NSURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 20)
+        if let user = UserInfo.CurrentGBUser(){
+            user.lastTraining = nil
+            user.training = nil
+            Training.MR_truncateAll()
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         }
+        connection = NSURLConnection(request: request, delegate: self)
+        connection!.start()
+        
     }
     
     func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         print(error)
+        if hud != nil {
+            hud.mode = .Text
+            hud.detailsLabelText = error.localizedDescription
+            hud.hide(true, afterDelay: 1.5)
+            hud = nil
+        }
+        isTraining = false
+        self.beginButton.selected = false
     }
     
     
+    
     func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        if hud != nil {
+            hud.hide(true)
+            hud = nil
+        }
         if let httpRespone = response as? NSHTTPURLResponse{
             //print(httpRespone.allHeaderFields)
             if let Distance = httpRespone.allHeaderFields["Distance"] as? String,let pitch = httpRespone.allHeaderFields["pitch"] as? String,let roll = httpRespone.allHeaderFields["roll"] as? String,let yaw = httpRespone.allHeaderFields["yaw"] as? String,let time = httpRespone.allHeaderFields["X-Timestamp"] as? String{
-                viewModel.Distance = Double(Distance)!
-                viewModel.pitch = Double(pitch)!
-                viewModel.roll = Double(roll)!
-                viewModel.yaw = Double(yaw)!
+                viewModel.training = Training.MR_createEntity()
+                viewModel.training.distance = Double(Distance)!
+                viewModel.training.pitch = Double(pitch)!
+                viewModel.training.roll = Double(roll)!
+                viewModel.training.yaw = Double(yaw)!
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-                viewModel.time = dateFormatter.dateFromString(time)
+                viewModel.training.time = dateFormatter.dateFromString(time)
             }
-            
         }
     }
     
@@ -180,7 +250,20 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
                 print(viewModel)
                 viewModel.image = receivedImage
                 if let user = UserInfo.CurrentGBUser(){
-                    user.addTraining(viewModel);
+                    viewModel.training.image = imageData
+                    if user.training == nil{
+                        user.training = viewModel.training
+                        user.lastTraining = viewModel.training
+                    }
+                    else{
+                        let dateP = user.lastTraining?.time
+                        let dateN = viewModel.training.time
+                        let time = dateN!.timeIntervalSinceDate(dateP!)
+                        user.lastTraining?.timedisplay = time
+                        user.lastTraining?.next = viewModel.training
+                        user.lastTraining = viewModel.training
+                    }
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                 }
                 self.tableView.reloadData()
             }
@@ -191,30 +274,14 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         print("connectionDidFinishLoading")
+        if hud != nil {
+            hud.hide(true)
+            hud = nil
+        }
+        isTraining = false
+        self.beginButton.selected = false
     }
     
-////每接收一段数据就会调用此函数
-//-(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data
-//{
-//    // NSLog(@”==didReceiveData:data==%@==”,data);
-//    [self.allData appendData:data];
-//    // NSLog(@”==didReceiveData==self.allData==%@==”,self.allData);
-//    // http://zasper.net/archives/4891
-//    NSLog(@”connectDidReceiveData-endMarkerData-%@”,endMarkerData);
-//    NSRange endRange=[self.allData rangeOfData:endMarkerData
-//    options:0
-//    range:NSMakeRange(0, self.allData.length)];
-//    long endLocation=endRange.location + endRange.length;
-//    if(self.allData.length >= endLocation){
-//        NSRange imageRange=NSMakeRange(0, endLocation);
-//        NSData* imageData=[self.allData subdataWithRange:imageRange];
-//        UIImage* receivedImage=[UIImage imageWithData:imageData];
-//        if(receivedImage){
-//            self.imageView.image = receivedImage;
-//            NSLog(@”解码图片”);
-//        }
-//    }
-//}
 
     
     // MARK: - Navigation

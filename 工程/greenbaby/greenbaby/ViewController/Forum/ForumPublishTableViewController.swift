@@ -152,7 +152,7 @@ class ForumPublishTableViewController: UITableViewController,UIImagePickerContro
                 }
                 hud.mode = .Text
                 hud.hide(true, afterDelay: 1.5)
-                }, failure: { (NSError error) -> Void in
+                }, failure: { (error) -> Void in
                     print(error)
                     hud.mode = .Text
                     hud.labelText = error.domain;
