@@ -1611,7 +1611,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s1y-og-pSz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-543" y="3420.75"/>
+            <point key="canvasLocation" x="-555" y="3474.75"/>
         </scene>
         <!--论坛-->
         <scene sceneID="RJh-CD-Vgl">
@@ -3663,7 +3663,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="    " id="d5Q-AD-fwq">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="J5X-Xm-9jU">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="J5X-Xm-9jU">
                                         <rect key="frame" x="0.0" y="305" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J5X-Xm-9jU" id="0LT-x9-fLQ">
@@ -3835,6 +3835,7 @@
                         <outlet property="headImageView" destination="lcb-IE-yTf" id="2Sz-DY-f1A"/>
                         <outlet property="nameLabel" destination="Pnh-ev-3As" id="TzP-uc-tpn"/>
                         <outlet property="sexLabel" destination="HkS-U8-UBB" id="0Qt-sG-pjp"/>
+                        <segue destination="W9g-Jq-Vxv" kind="show" identifier="CompleteValueIdentifier" id="lo1-Je-m0S"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oC0-2z-bYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5706,7 +5707,8 @@
                                                             <exclude reference="Z3R-SE-XN3"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="208" y="12" width="30" height="18"/>
                                                         <mask key="constraints">
                                                             <include reference="Z3R-SE-XN3"/>
                                                         </mask>
@@ -5725,7 +5727,8 @@
                                                             <exclude reference="3oF-qQ-H1g"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="176" y="15" width="30" height="12"/>
                                                         <mask key="constraints">
                                                             <include reference="3oF-qQ-H1g"/>
                                                         </mask>
@@ -5742,7 +5745,8 @@
                                                             <exclude reference="XHe-fJ-150"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="131" y="17" width="42" height="8"/>
                                                         <mask key="constraints">
                                                             <include reference="XHe-fJ-150"/>
                                                         </mask>
@@ -9368,9 +9372,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="GSM-9B-YjK"/>
         <segue reference="rlu-Sx-qee"/>
-        <segue reference="Vx3-Fu-c1k"/>
-        <segue reference="NQ4-sr-ww3"/>
         <segue reference="Xxc-bD-6kO"/>
         <segue reference="B3D-DZ-zhz"/>
+        <segue reference="Vx3-Fu-c1k"/>
+        <segue reference="NQ4-sr-ww3"/>
+        <segue reference="lo1-Je-m0S"/>
     </inferredMetricsTieBreakers>
 </document>

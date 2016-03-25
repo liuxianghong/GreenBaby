@@ -27,6 +27,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var rankLabel : UILabel!
     @IBOutlet weak var rankTotalLabel : UILabel!
     
+    var isSubVc = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,12 +84,16 @@ class HomeViewController: UIViewController {
         nameLabel.text = UserInfo.CurrentUser().userName
         addressLabel.text = UserInfo.CurrentUser().city
         self.loadScore()
+        isSubVc = false
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if isSubVc {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+        
     }
     
     @IBAction func shareClicked(sender: UIButton) {
@@ -179,14 +185,15 @@ class HomeViewController: UIViewController {
         self.performSegueWithIdentifier("captureIdentifier", sender: nil)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        isSubVc = true
     }
-    */
+ 
 
 }

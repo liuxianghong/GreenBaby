@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserSeeTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class UserSeeTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,CompleteValueTableViewDelegate{
 
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var headImageView : UIImageView!
@@ -17,6 +17,8 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
     @IBOutlet weak var cityLabel : UILabel!
     @IBOutlet weak var averageTimeLabel : UILabel!
     @IBOutlet weak var ageLabel : UILabel!
+    
+    var model = CompleteMaterialModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +36,7 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
         }
         self.sexLabel.text = UserInfo.CurrentUser().sex == 0 ? "男" : "女"
         self.averageTimeLabel.text = UserInfo.CurrentUser().averageTime
-        self.cityLabel.text = UserInfo.CurrentUser().province! + " " + UserInfo.CurrentUser().city!
+        self.cityLabel.text = String(UserInfo.CurrentUser().province) + " " + String(UserInfo.CurrentUser().city)
         self.eyeSightLabel.text = UserInfo.CurrentUser().eyeSight
         self.ageLabel.text = UserInfo.CurrentUser().age
     }
@@ -47,6 +49,15 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func didChoice(model: CompleteMaterialModel, index: Int) {
+        if index == 3 {
+            self.model.value = ""
+            self.model.id = model.id
+            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 4)
+        }
     }
 
     // MARK: - Table view data source
@@ -73,6 +84,24 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
             actionVC.addAction(actionCancel)
             self.presentViewController(actionVC, animated: true, completion: { () -> Void in
             })
+        }
+        
+        if indexPath.section == 0 && indexPath.row == 2 {
+            model.value = UserInfo.CurrentUser().eyeSight
+            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 0)
+        }
+        if indexPath.section == 0 && indexPath.row == 3 {
+            model.value = UserInfo.CurrentUser().averageTime
+            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 1)
+        }
+        if indexPath.section == 1 && indexPath.row == 0 {
+            model.value = UserInfo.CurrentUser().age
+            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 2)
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 2 {
+            model.value = UserInfo.CurrentUser().province
+            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 3)
         }
     }
     
@@ -137,6 +166,7 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
             })]
         }
     }
+    
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 0
@@ -192,14 +222,20 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "CompleteValueIdentifier"{
+            let vc : CompleteValueTableViewController = segue.destinationViewController as! CompleteValueTableViewController
+            vc.type = sender as! Int
+            vc.completeMaterialModel = model
+            vc.completeValueDelegate = self
+        }
     }
-    */
+ 
 
 }

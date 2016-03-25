@@ -79,6 +79,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
         }
         
         self.tableView.tableFooterView = UIView()
+        self.scoreLabel.text = "0"
     }
     
     func loadDeviceIP(){
@@ -122,7 +123,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             connection.cancel()
             connection = nil
         }
-        
+        UserInfo.CurrentGBUser().ip = "123"
         if !UserInfo.CurrentGBUser().ip!.isEmpty{
             print(UserInfo.CurrentGBUser().ip)
         }
@@ -150,6 +151,10 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             return
         }
         if UserInfo.CurrentGBUser().training == nil {
+            let huds = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            huds.mode = .Text
+            huds.detailsLabelText = "没有回放数据"
+            huds.hide(true, afterDelay: 1.5)
             return
         }
         stopClick(nil)
@@ -167,7 +172,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
                 viewModel.training = viewModel.training.next
             }
             if viewModel.training != nil {
-                viewModel.image = UIImage(data: viewModel.training.image!)
+                self.imageView.image = UIImage(data: viewModel.training.image!)
                 self.tableView.reloadData()
                 self.scoreLabel.text = String(format: "%.1f", viewModel.totalScore())
             }
@@ -178,7 +183,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             if viewModel.training.timedisplay == nil {
                 return
             }
-            self.performSelector(#selector(TrainingViewController.replay), withObject: nil, afterDelay: NSTimeInterval(viewModel.training.timedisplay!))
+            self.performSelector("replay", withObject: nil, afterDelay: NSTimeInterval(viewModel.training.timedisplay!))
         }
     }
     
@@ -215,7 +220,7 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     
     func netWorkVideo(){
         UserInfo.CurrentGBUser().ip = "192.168.1.138"
-        let urls = "http://192.168.1.138:8081"
+        let urls = "http://192.168.1.138:8081" //andy修改此处
         let url = NSURL(string: urls)
         let request = NSURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 20)
         if let user = UserInfo.CurrentGBUser(){

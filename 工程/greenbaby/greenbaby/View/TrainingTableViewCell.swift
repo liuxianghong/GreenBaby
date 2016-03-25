@@ -55,22 +55,22 @@ class TrainingTableViewCell: UITableViewCell {
             }
             else{
                 if type == 0{
-                    self.sliderValueLabel.text = String(newValue.training.distance)
+                    self.sliderValueLabel.text = String(newValue.training.distance!)
                     layoutValue = CGFloat(Float(newValue.training.distance!)/35.0)
                     self.scoreLable.text = String(format: "%.1f", newValue.distanceScore())
                 }
                 else if type == 1{
-                    self.sliderValueLabel.text = String(newValue.training.pitch)
+                    self.sliderValueLabel.text = String(newValue.training.pitch!)
                     layoutValue = CGFloat(Float(newValue.training.pitch!)/90.0)
                     self.scoreLable.text = String(format: "%.1f", newValue.pitchScore())
                 }
                 else if type == 2{
-                    self.sliderValueLabel.text = String(newValue.training.yaw)
+                    self.sliderValueLabel.text = String(newValue.training.yaw!)
                     layoutValue = CGFloat(Float(newValue.training.yaw!)/90.0)
                     self.scoreLable.text = String(format: "%.1f", newValue.yawScore())
                 }
                 else if type == 3{
-                    self.sliderValueLabel.text = String(newValue.training.roll)
+                    self.sliderValueLabel.text = String(newValue.training.roll!)
                     layoutValue = CGFloat(Float(newValue.training.roll!)/90.0)
                     self.scoreLable.text = String(format: "%.1f", newValue.rollScore())
                 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CompleteValueTableViewDelegate : NSObjectProtocol {
+    func didChoice(model : CompleteMaterialModel , index : Int);
+}
+
 class CompleteValueTableViewController: UITableViewController {
 
     var type = 0
@@ -15,6 +19,7 @@ class CompleteValueTableViewController: UITableViewController {
     var pid : String = ""
     var tableViewDataArray : NSArray!
     var completeMaterialModel : CompleteMaterialModel!
+    weak var completeValueDelegate : CompleteValueTableViewDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -110,7 +115,9 @@ class CompleteValueTableViewController: UITableViewController {
             let dic : NSDictionary = self.tableViewDataArray[indexPath.row] as! NSDictionary
             completeMaterialModel.value = dic["value"] as? String
             completeMaterialModel.id = String(dic["id"] as! Int)
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(type != 3)
+            self.completeValueDelegate.didChoice(completeMaterialModel, index: type)
+            
         }
     }
     /*

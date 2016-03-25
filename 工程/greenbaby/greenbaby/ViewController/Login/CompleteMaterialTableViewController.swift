@@ -17,7 +17,7 @@ class CompleteMaterialModel{
     }
 }
 
-class CompleteMaterialTableViewController: UITableViewController {
+class CompleteMaterialTableViewController: UITableViewController ,CompleteValueTableViewDelegate {
     var wxLoginModel = WXLoginModel()
     var tableViewArray : NSArray = [["视力信息",CompleteMaterialModel()],["平均每天读写时间（小时）",CompleteMaterialModel()],["年龄（岁）",CompleteMaterialModel()],["省份",CompleteMaterialModel()],["城市",CompleteMaterialModel()]]
     
@@ -43,6 +43,12 @@ class CompleteMaterialTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
+    
+    
+    func didChoice(model: CompleteMaterialModel, index: Int) {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -222,6 +228,7 @@ class CompleteMaterialTableViewController: UITableViewController {
             vc.type = sender as! Int
             let array : NSArray = tableViewArray[vc.type] as! NSArray
             vc.completeMaterialModel = (array[1] as! CompleteMaterialModel)
+            vc.completeValueDelegate = self
             
             if vc.type == 4{
                 let array : NSArray = tableViewArray[3] as! NSArray
