@@ -264,6 +264,7 @@
 		D38B7FC71C3F76F9003B150C /* KChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC61C3F76F9003B150C /* KChartTableViewCell.swift */; };
 		D38B7FC91C3F7740003B150C /* KChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FC81C3F7740003B150C /* KChartView.swift */; };
 		D38B7FD01C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */; };
+		D39B7EBD1CB2A4F000C45682 /* ChangeSexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B7EBC1CB2A4F000C45682 /* ChangeSexViewController.swift */; };
 		D3B3180C1C1BF5E300ADE350 /* but_chngxin.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FD1C1BF5E300ADE350 /* but_chngxin.png */; };
 		D3B3180D1C1BF5E300ADE350 /* but_chngxin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FE1C1BF5E300ADE350 /* but_chngxin@2x.png */; };
 		D3B3180E1C1BF5E300ADE350 /* but_chngxin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B317FF1C1BF5E300ADE350 /* but_chngxin@3x.png */; };
@@ -606,6 +607,7 @@
 		D38B7FC81C3F7740003B150C /* KChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KChartView.swift; sourceTree = "<group>"; };
 		D38B7FCE1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+quadCurvedPath.h"; sourceTree = "<group>"; };
 		D38B7FCF1C3F7A88003B150C /* UIBezierPath+quadCurvedPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+quadCurvedPath.m"; sourceTree = "<group>"; };
+		D39B7EBC1CB2A4F000C45682 /* ChangeSexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeSexViewController.swift; sourceTree = "<group>"; };
 		D3B317FD1C1BF5E300ADE350 /* but_chngxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = but_chngxin.png; sourceTree = "<group>"; };
 		D3B317FE1C1BF5E300ADE350 /* but_chngxin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "but_chngxin@2x.png"; sourceTree = "<group>"; };
 		D3B317FF1C1BF5E300ADE350 /* but_chngxin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "but_chngxin@3x.png"; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 				D34671531C23EEF900ECAEEA /* ThreadsTableViewController.swift */,
 				D34671551C23F80100ECAEEA /* UserSeeTableViewController.swift */,
 				D34671751C24007D00ECAEEA /* ChangeNameViewController.swift */,
+				D39B7EBC1CB2A4F000C45682 /* ChangeSexViewController.swift */,
 			);
 			path = MySelf;
 			sourceTree = "<group>";
@@ -1309,7 +1312,6 @@
 				TargetAttributes = {
 					D3BDDECC1C043EAD00F06536 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = F44XSCNJGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1685,6 +1687,7 @@
 				D316A9471C31076E00B158B8 /* KTableViewController.swift in Sources */,
 				D35A50691C3A4472007BC2FE /* VSInspectionViewController.swift in Sources */,
 				D3364BC51C1ABFD50055C75C /* QRCodeGenerate.swift in Sources */,
+				D39B7EBD1CB2A4F000C45682 /* ChangeSexViewController.swift in Sources */,
 				D3ED05441C23135400DF76E2 /* ForumThreadsDetailCommentHeadTableViewCell.swift in Sources */,
 				D34671541C23EEF900ECAEEA /* ThreadsTableViewController.swift in Sources */,
 				D37978F71C9EF4AF00AF8E93 /* User+CoreDataProperties.swift in Sources */,

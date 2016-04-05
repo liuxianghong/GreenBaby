@@ -52,7 +52,10 @@ class UserInfo: NSObject {
             if !(userId != nil){
                 return nil
             }
-            return NSUserDefaults.standardUserDefaults().objectForKey("province") as? String
+            if let province = NSUserDefaults.standardUserDefaults().objectForKey("province") as? String{
+                return province
+            }
+            return ""
         }
     }
     
@@ -112,7 +115,10 @@ class UserInfo: NSObject {
             if !(userId != nil){
                 return nil
             }
-            return NSUserDefaults.standardUserDefaults().objectForKey("city") as? String
+            if let province = NSUserDefaults.standardUserDefaults().objectForKey("city") as? String{
+                return province
+            }
+            return ""
         }
     }
     

@@ -28,7 +28,10 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.tableFooterView = UIView()
-        
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if NSUserDefaults.standardUserDefaults().objectForKey("headImage") != nil{
             headImageView.layer.cornerRadius = 55/2;
             headImageView.layer.masksToBounds = true;
@@ -36,13 +39,9 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
         }
         self.sexLabel.text = UserInfo.CurrentUser().sex == 0 ? "男" : "女"
         self.averageTimeLabel.text = UserInfo.CurrentUser().averageTime
-        self.cityLabel.text = String(UserInfo.CurrentUser().province) + " " + String(UserInfo.CurrentUser().city)
+        self.cityLabel.text = UserInfo.CurrentUser().province! + " " + UserInfo.CurrentUser().city!
         self.eyeSightLabel.text = UserInfo.CurrentUser().eyeSight
         self.ageLabel.text = UserInfo.CurrentUser().age
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         self.nameLabel.text = UserInfo.CurrentUser().userName
     }
     
@@ -56,7 +55,7 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
         if index == 3 {
             self.model.value = ""
             self.model.id = model.id
-            self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 4)
+            //self.performSegueWithIdentifier("CompleteValueIdentifier", sender: 4)
         }
     }
 
@@ -234,6 +233,7 @@ class UserSeeTableViewController: UITableViewController,UIImagePickerControllerD
             vc.type = sender as! Int
             vc.completeMaterialModel = model
             vc.completeValueDelegate = self
+            vc.vcType = 1
         }
     }
  

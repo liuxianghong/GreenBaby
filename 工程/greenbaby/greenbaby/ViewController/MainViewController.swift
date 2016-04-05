@@ -32,10 +32,10 @@ class MainViewController: UITabBarController {
         }
         UserInfo.CurrentUser().userId = nil
         
-        for _ in 1...10{
-            let uuid = NSUUID()
-            print(uuid.UUIDString)
-        }
+//        for _ in 1...10{
+//            let uuid = NSUUID()
+//            print(uuid.UUIDString)
+//        }
 //        let byte : [UInt8] = [0xff, 0xd8];
 //        let data = NSData(bytes: byte, length: 2)
 //        print(data)
@@ -53,7 +53,7 @@ class MainViewController: UITabBarController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if first{
-            UserInfo.CurrentUser().userId = 32
+            //UserInfo.CurrentUser().userId = 19
             self.performSegueWithIdentifier("loginIdentifier", sender: nil)
             first = false
         }

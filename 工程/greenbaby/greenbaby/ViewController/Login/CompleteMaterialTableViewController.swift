@@ -66,11 +66,11 @@ class CompleteMaterialTableViewController: UITableViewController ,CompleteValueT
         
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
-        let eyesight = (tableViewArray[0][1] as! CompleteMaterialModel).id
-        let averageTime = (tableViewArray[1][1] as! CompleteMaterialModel).id
-        let age = (tableViewArray[2][1] as! CompleteMaterialModel).id
-        let provinceId = (tableViewArray[3][1] as! CompleteMaterialModel).id
-        let cityId = (tableViewArray[4][1] as! CompleteMaterialModel).id
+        let eyesight = ((tableViewArray[0] as! NSArray)[1] as! CompleteMaterialModel).id
+        let averageTime = ((tableViewArray[1] as! NSArray)[1] as! CompleteMaterialModel).id
+        let age = ((tableViewArray[2] as! NSArray)[1] as! CompleteMaterialModel).id
+        let provinceId = ((tableViewArray[3] as! NSArray)[1] as! CompleteMaterialModel).id
+        let cityId = ((tableViewArray[4] as! NSArray)[1] as! CompleteMaterialModel).id
         if eyesight.isEmpty{
             hud.mode = .Text
             hud.detailsLabelText = "请选择视力范围"

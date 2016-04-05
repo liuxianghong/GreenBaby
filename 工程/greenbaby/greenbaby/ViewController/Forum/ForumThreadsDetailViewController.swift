@@ -54,6 +54,7 @@ class ForumThreadsDetailViewController: UIViewController,UITextViewDelegate ,UIS
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
         self.loadData(true)
     }
     

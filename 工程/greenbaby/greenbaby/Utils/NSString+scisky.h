@@ -11,8 +11,8 @@
 
 #define kErrorEmpty @"服务器返回错误"
 #define kErrorConnect @"无法连接到服务器"
-#define baseURL @"http://120.25.159.193:8090/greenbaby"
-#define resourceSeeURL @"http://120.25.159.193/ResourceServer/"
+#define baseURL @"http://112.74.28.104:8090/greenbaby"
+#define resourceSeeURL @"http://112.74.28.104/ResourceServer/"
 
 @interface NSString (scisky)
 -(NSString *)AESEncrypt;

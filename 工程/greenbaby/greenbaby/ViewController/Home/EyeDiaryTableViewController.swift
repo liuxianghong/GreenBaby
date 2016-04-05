@@ -45,6 +45,7 @@ class EyeDiaryTableViewController: UITableViewController {
             first = false
             self.tableView.mj_header.beginRefreshing()
         }
+        self.tableView.reloadData()
     }
 
     func loadData(){

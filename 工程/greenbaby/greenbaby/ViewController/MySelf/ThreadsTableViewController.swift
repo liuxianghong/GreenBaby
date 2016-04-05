@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
+class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource ,ForumThreadsDetailVCDelegate{
 
     var first : Bool = true
     var tableViewArray = [Dictionary<String,AnyObject>]()
@@ -50,11 +50,20 @@ class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
             first = false
             self.tableView.mj_header.beginRefreshing()
         }
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func didPraiseOrCommplate(index: Int, dic: [String : AnyObject]) {
+        if tableViewArray.count > index{
+            if tableViewArray[index]["threadId"] as! Int == dic["threadId"] as! Int{
+                tableViewArray[index] = dic
+            }
+        }
     }
     
     func loadData(){
@@ -143,6 +152,10 @@ class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
         return cell
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("ForumThreadsDetail", sender: indexPath)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -179,14 +192,19 @@ class ThreadsTableViewController: UITableViewController,DZNEmptyDataSetDelegate,
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ForumThreadsDetail"{
+            let vc = segue.destinationViewController as! ForumThreadsDetailViewController
+            let indexPath = sender as! NSIndexPath
+            vc.dic = self.tableViewArray[indexPath.row]
+            vc.index = indexPath.row
+            vc.forumThreadsDetailVCDelegate = self
+        }
     }
-    */
 
 }

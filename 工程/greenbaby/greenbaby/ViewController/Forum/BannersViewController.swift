@@ -27,6 +27,10 @@ class BannersViewController: UIViewController,UITableViewDataSource,UITableViewD
         
         self.tableView.tableFooterView = UIView()
         
+        var frame = self.tableView.tableHeaderView?.frame
+        frame?.size.height = 456 / 720 * self.view.frame.size.width
+        self.tableView.tableHeaderView?.frame = frame!
+        
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
             self.page = 1
             self.loadData()
@@ -46,6 +50,7 @@ class BannersViewController: UIViewController,UITableViewDataSource,UITableViewD
             first = false
             self.tableView.mj_header.beginRefreshing()
         }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

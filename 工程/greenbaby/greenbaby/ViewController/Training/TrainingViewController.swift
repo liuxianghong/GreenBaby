@@ -8,6 +8,12 @@
 
 import UIKit
 
+class TrainingReplayModel : NSObject {
+    var beginTime = NSDate()
+    var timeCount:NSTimeInterval = 1
+    var currntTime = NSDate()
+}
+
 class TrainingViewModel : NSObject{
     var training : Training!
     var image : UIImage!
@@ -66,6 +72,9 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     var isReplay = false
     var hud : MBProgressHUD!
     
+    let replayModel = TrainingReplayModel()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -118,12 +127,10 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             return
         }
         
-        //self.ip = "192.168.1.138"
         if connection != nil{
             connection.cancel()
             connection = nil
         }
-        UserInfo.CurrentGBUser().ip = "123"
         if !UserInfo.CurrentGBUser().ip!.isEmpty{
             print(UserInfo.CurrentGBUser().ip)
         }
@@ -132,6 +139,8 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
         }
         beginButton.selected = true
         isTraining = true
+        isReplay = false
+        updateReplaySlider()
         hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         netWorkVideo()
     }
@@ -144,23 +153,45 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
             connection = nil
         }
         isReplay = false
+        updateReplaySlider()
     }
     
     @IBAction func seebackClick(sender : UIButton?){
         if UserInfo.CurrentGBUser() == nil {
             return
         }
-        if UserInfo.CurrentGBUser().training == nil {
+        if UserInfo.CurrentGBUser().training == nil || UserInfo.CurrentGBUser().lastTraining == nil {
             let huds = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             huds.mode = .Text
             huds.detailsLabelText = "没有回放数据"
             huds.hide(true, afterDelay: 1.5)
             return
         }
+        if let timeLast = UserInfo.CurrentGBUser().lastTraining?.time, let timeBegin = UserInfo.CurrentGBUser().training?.time{
+            replayModel.timeCount = timeLast.timeIntervalSinceDate(timeBegin)
+            replayModel.beginTime = timeBegin
+            if replayModel.timeCount == 0{
+                replayModel.timeCount = 1
+            }
+        }
+        else{
+            return
+        }
         stopClick(nil)
         viewModel.training = nil
         isReplay = true
         replay()
+    }
+    
+    func updateReplaySlider() {
+        if isReplay {
+            sliderView.hidden = false
+            sliderBackView.hidden = false
+            sliderConstraint.constant = self.view.frame.size.width - CGFloat(replayModel.currntTime.timeIntervalSinceDate(replayModel.beginTime) / replayModel.timeCount) * self.view.frame.size.width
+        }else{
+            sliderView.hidden = true
+            sliderBackView.hidden = true
+        }
     }
     
     func replay() {
@@ -175,16 +206,22 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
                 self.imageView.image = UIImage(data: viewModel.training.image!)
                 self.tableView.reloadData()
                 self.scoreLabel.text = String(format: "%.1f", viewModel.totalScore())
+                replayModel.currntTime = viewModel.training.time!
             }
             else{
+                isReplay = false
+                updateReplaySlider()
                 return
             }
             
             if viewModel.training.timedisplay == nil {
+                isReplay = false
+                updateReplaySlider()
                 return
             }
             self.performSelector("replay", withObject: nil, afterDelay: NSTimeInterval(viewModel.training.timedisplay!))
         }
+        updateReplaySlider()
     }
     
     
@@ -219,8 +256,8 @@ class TrainingViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func netWorkVideo(){
-        UserInfo.CurrentGBUser().ip = "192.168.1.138"
-        let urls = "http://192.168.1.138:8081" //andy修改此处
+        //UserInfo.CurrentGBUser().ip = "192.168.1.138" //andy修改此处
+        let urls = "http://\(UserInfo.CurrentGBUser().ip!):8081"
         let url = NSURL(string: urls)
         let request = NSURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 20)
         if let user = UserInfo.CurrentGBUser(){

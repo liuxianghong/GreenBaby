@@ -41,7 +41,13 @@ class EyeDiaryTableViewCell: UITableViewCell ,UICollectionViewDelegate,UICollect
                 let format = NSDateFormatter()
                 format.dateFormat = "yyyy-MM-dd | hh:mm"
                 createTimeLabel.text = format.stringFromDate(timeDate)
-                imageArray = value["images"] as! NSArray
+                if let imges = value["images"] as? NSArray{
+                    imageArray = imges
+                }
+                else{
+                    imageArray = NSArray()
+                }
+                
                 if imageArray.count == 0 {
                     collectionViewConstraint.constant = 0
                 }
